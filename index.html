@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Malam Inspirasi ASPutra 2027 · Choose Your World</title>
+<meta name="description" content="Five worlds. One night. Vote for the theme of the ASPer22 batch dinner, 23 April 2027 at Dewan Bankuet UPM.">
+<meta name="theme-color" content="#000000">
+
+<!-- Link preview (WhatsApp / Instagram / Telegram). Change the URLs if the site lives somewhere else. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Malam Inspirasi ASPutra 2027">
+<meta property="og:title" content="Malam Inspirasi ASPutra 2027 · Choose Your World">
+<meta property="og:description" content="Five worlds. One night. Vote for the ASPer22 batch dinner theme. 23.04.2027 · Dewan Bankuet UPM.">
+<meta property="og:url" content="https://kimbergz.github.io/malam-inspirasi/">
+<meta property="og:image" content="https://kimbergz.github.io/malam-inspirasi/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Malam Inspirasi ASPutra 2027: Select your world">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Cpath d='M32 8 52 32 32 56 12 32Z' fill='none' stroke='%23e2c26e' stroke-width='4'/%3E%3Ctext x='32' y='40' font-size='20' text-anchor='middle' fill='%23e2c26e' font-family='serif'%3EMI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Cinzel:wght@600;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Courier+Prime&family=Josefin+Sans:wght@400;600&family=Limelight&family=Playfair+Display:ital,wght@0,800;1,600&family=Poiret+One&family=Press+Start+2P&display=swap">
+
+<style>
+/* ============================== BASE ============================== */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  --hud-h:104px; --nav-h:68px;
+  --ink:#f3f3f3; --muted:#cfcfcf; --accent:#e6c46f; --accent-ink:#000;
+  --card:rgba(8,8,8,.84); --line:rgba(255,255,255,.3);
+  --title:'Playfair Display',Georgia,serif; --body:'Josefin Sans',system-ui,sans-serif;
+  --pixel:'Press Start 2P',ui-monospace,monospace;
+  background:#000; color:var(--ink); font-family:var(--body);
+  overflow-x:hidden; -webkit-tap-highlight-color:transparent;
+}
+button{font:inherit;color:inherit}
+a{color:inherit}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:8px;top:-60px;z-index:100;background:#fff;color:#000;padding:10px 14px;font-family:var(--pixel);font-size:10px}
+.skip:focus{top:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1:focus,h2:focus{outline:none}
+body[data-view=hub] #world,body[data-view=world] #hub{display:none}
+
+/* ============================== SCENES ============================== */
+#scenes{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.scene{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;visibility:hidden}
+.scene.on{opacity:1;visibility:visible}
+#fx{position:absolute;inset:0;width:100%;height:100%}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 40%,rgba(0,0,0,.75) 100%)}
+.scene svg{position:absolute;display:block}
+
+/* --- Hub (arcade grid floor) --- */
+.s-hub{background:radial-gradient(ellipse at 50% 30%,#1b1530 0%,#08060f 55%,#000 100%)}
+.s-hub .floor{position:absolute;left:-50%;right:-50%;bottom:-10%;height:55%;transform:perspective(320px) rotateX(62deg);transform-origin:50% 100%;
+  background:repeating-linear-gradient(90deg,rgba(230,196,111,.35) 0 2px,transparent 2px 80px),repeating-linear-gradient(0deg,rgba(230,196,111,.35) 0 2px,transparent 2px 80px);
+  -webkit-mask:linear-gradient(0deg,#000 20%,transparent 95%);mask:linear-gradient(0deg,#000 20%,transparent 95%);animation:floor 3s linear infinite}
+.s-hub .sun{position:absolute;left:50%;top:44%;width:44vmin;height:44vmin;margin-left:-22vmin;border-radius:50%;
+  background:linear-gradient(180deg,#e6c46f,#8e1b2c 70%);opacity:.22;-webkit-mask:repeating-linear-gradient(180deg,#000 0 10px,transparent 10px 14px);mask:repeating-linear-gradient(180deg,#000 0 10px,transparent 10px 14px)}
+@keyframes floor{to{background-position:0 80px,0 80px}}
+
+/* --- Noir --- */
+.s-noir{background:radial-gradient(ellipse at 72% 18%,#6b6b6b 0%,#262626 38%,#070707 75%)}
+.s-noir .blinds{position:absolute;right:-10%;top:-5%;width:90%;height:85%;
+  background:repeating-linear-gradient(172deg,rgba(255,255,255,.16) 0 16px,transparent 16px 40px);
+  -webkit-mask:radial-gradient(ellipse at 60% 35%,#000 0%,transparent 70%);mask:radial-gradient(ellipse at 60% 35%,#000 0%,transparent 70%);transform:skewX(-12deg)}
+.s-noir .beam{position:absolute;left:-20%;top:-10%;width:120%;height:70%;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,0) 60%);
+  clip-path:polygon(0 0,18% 0,100% 100%,55% 100%);animation:flicker 3.2s infinite steps(1)}
+.s-noir svg{left:4%;bottom:0;height:62%;opacity:.85}
+@keyframes flicker{0%,100%{opacity:.9}8%{opacity:.6}9%{opacity:1}31%{opacity:.75}33%{opacity:.95}62%{opacity:.7}64%{opacity:1}}
+
+/* --- Speakeasy --- */
+.s-speakeasy{background:linear-gradient(180deg,#1a0508 0%,#3d0c15 45%,#2a0a0c 62%,#1b0d06 100%)}
+.s-speakeasy .wood{position:absolute;left:0;right:0;bottom:0;height:36%;
+  background:repeating-linear-gradient(90deg,#3a1d0e 0 46px,#2c150a 46px 48px,#432312 48px 94px,#2c150a 94px 96px);
+  box-shadow:inset 0 14px 0 -8px #b8873a,inset 0 18px 30px rgba(0,0,0,.6)}
+.s-speakeasy .lamp{position:absolute;width:60vmax;height:60vmax;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,170,70,.32) 0%,rgba(255,140,40,.08) 35%,transparent 65%);animation:lamp 5s ease-in-out infinite}
+.s-speakeasy .l1{left:-25vmax;top:-20vmax}.s-speakeasy .l2{right:-28vmax;top:5vmax;animation-delay:-2.5s}
+.s-speakeasy svg{right:3%;bottom:30%;height:30%;opacity:.8}
+@keyframes lamp{50%{opacity:.7;transform:scale(.96)}}
+
+/* --- Gotham --- */
+.s-gotham{background:linear-gradient(180deg,#01040c 0%,#061230 55%,#0d1d44 100%)}
+.s-gotham .light{position:absolute;bottom:20%;width:16vmax;height:140vmax;transform-origin:50% 100%;
+  background:linear-gradient(0deg,rgba(200,215,255,.32),rgba(200,215,255,0) 85%);clip-path:polygon(44% 100%,56% 100%,100% 0,0 0);filter:blur(2px)}
+.s-gotham .g1{left:16%;animation:sweep 9s ease-in-out infinite alternate}
+.s-gotham .g2{right:12%;animation:sweep 11s ease-in-out infinite alternate-reverse}
+.s-gotham .moonhaze{position:absolute;right:-10%;top:-15%;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,rgba(120,150,220,.18),transparent 60%)}
+.s-gotham svg{left:0;bottom:0;width:100%;height:46%}
+@keyframes sweep{from{transform:rotate(-28deg)}to{transform:rotate(24deg)}}
+
+/* --- Titanic --- */
+.s-titanic{background:linear-gradient(180deg,#040b1d 0%,#0b1d3f 48%,#0a1830 60%,#030a18 100%)}
+.s-titanic .moon{position:absolute;right:12%;top:18%;width:7vmin;height:7vmin;border-radius:50%;background:#f7f0e1;box-shadow:0 0 30px 8px rgba(247,240,225,.35),0 0 120px 40px rgba(160,190,255,.12)}
+.s-titanic .stars{position:absolute;inset:0 0 40% 0;background:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 8%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 25%,#fff,transparent),radial-gradient(1px 1px at 70% 12%,#fff,transparent),radial-gradient(1px 1px at 85% 35%,#fff,transparent),radial-gradient(1px 1px at 20% 40%,#fff,transparent),radial-gradient(1.5px 1.5px at 45% 45%,#fff,transparent),radial-gradient(1px 1px at 92% 6%,#fff,transparent);opacity:.7}
+.s-titanic svg.ship{left:2%;bottom:16%;width:min(84vw,980px);filter:drop-shadow(0 0 18px rgba(255,214,140,.15))}
+.s-titanic svg.berg{right:1%;bottom:17%;width:min(24vw,230px);animation:bob 4s ease-in-out infinite,creep 46s ease-in-out infinite alternate}
+.s-titanic .puff{animation:puff 5s linear infinite;transform-box:fill-box;transform-origin:center}
+.s-titanic .p1{animation-delay:-1.7s}.s-titanic .p2{animation-delay:-3.3s}
+.s-titanic svg.sea{left:0;bottom:0;width:100%;height:20%}
+.s-titanic .shimmer{animation:shimmer 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px) rotate(-1deg)}}
+@keyframes creep{from{translate:0 0}to{translate:-9vw 0}}
+@keyframes blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}
+@keyframes puff{0%{transform:translate(0,0) scale(.6);opacity:0}15%{opacity:.8}100%{transform:translate(-90px,-40px) scale(2.2);opacity:0}}
+@media (max-width:899px){.s-titanic svg.ship{width:150vw;left:-62vw;bottom:19%}.s-titanic svg.berg{width:34vw;right:-2vw;bottom:19.5%}}
+@media (min-width:900px){.s-titanic svg.ship{left:4%;bottom:17%}.s-titanic svg.berg{right:4%}}
+@keyframes shimmer{50%{opacity:.25;transform:translateX(12px)}}
+
+/* --- Gatsby --- */
+.s-gatsby{background:radial-gradient(ellipse at 50% 110%,#2a2210 0%,#0b0a06 50%,#000 80%)}
+.s-gatsby svg.fan{left:50%;bottom:0;width:150vmin;max-width:1100px;transform:translateX(-50%);opacity:.55}
+.s-gatsby .green{position:absolute;left:12%;bottom:24%;width:7px;height:7px;border-radius:50%;background:#45f08f;
+  box-shadow:0 0 12px 4px rgba(69,240,143,.7),0 0 40px 14px rgba(69,240,143,.25);animation:green 2.6s ease-in-out infinite}
+.s-gatsby .water{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,rgba(226,194,110,.08),rgba(0,0,0,.6))}
+@keyframes green{50%{opacity:.35}}
+
+/* ============================== HUD ============================== */
+#hud{position:fixed;top:0;left:0;right:0;z-index:20;height:calc(var(--hud-h) + env(safe-area-inset-top));
+  padding:calc(env(safe-area-inset-top) + 8px) 12px 8px;background:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.6) 75%,transparent);text-align:center}
+.hud-top{display:flex;justify-content:space-between;align-items:center;height:26px;gap:8px}
+.hud-brand{font-family:var(--pixel);font-size:8px;line-height:1.5;text-align:left;color:#fff;opacity:.85;letter-spacing:.04em}
+#sound{font-family:var(--pixel);font-size:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.35);padding:8px 9px;border-radius:2px;cursor:pointer;min-height:32px}
+#sound[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+#demo{font-family:var(--pixel);font-size:6.5px;line-height:1.5;background:#ff3b3b;color:#fff;padding:4px 6px;letter-spacing:.04em;border-radius:2px;text-align:center}
+#demo[hidden]{display:none}
+#clock-label{font-family:var(--pixel);font-size:8px;letter-spacing:.08em;color:var(--accent);margin:4px 0 6px;text-shadow:0 0 8px rgba(0,0,0,.9)}
+#clock-label small{display:block;font-size:7px;opacity:.75;margin-top:3px;color:#fff}
+.digits{display:inline-flex;align-items:flex-start;gap:4px;font-family:var(--pixel);color:#fff;text-shadow:0 0 10px var(--accent),0 2px 0 #000}
+.digits b{display:block;font-size:22px;font-weight:400;min-width:2ch}
+.digits i{display:block;font-style:normal;font-size:6px;opacity:.7;margin-top:5px;letter-spacing:.1em}
+.digits .colon{font-size:20px;opacity:.7;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:.15}}
+
+main{position:relative;z-index:5;padding:calc(var(--hud-h) + env(safe-area-inset-top) + 16px) 14px calc(env(safe-area-inset-bottom) + 18px)}
+body[data-view=world] main{padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px)}
+
+/* ============================== HUB ============================== */
+.hub-head{text-align:center;margin:0 auto 14px;max-width:1200px}
+.hub-head h1{font-family:var(--pixel);font-weight:400;font-size:clamp(14px,4.4vw,24px);line-height:1.5;margin:0;color:#fff;text-shadow:3px 3px 0 #6b2131,6px 6px 0 #0d1d44}
+.hub-head .bm{font-family:var(--pixel);font-size:8px;color:var(--accent);margin:8px 0 0;letter-spacing:.1em}
+.hub-status{font-size:.95rem;margin:10px auto 0;color:#eee;max-width:52ch;line-height:1.45}
+.hub-status b{color:var(--accent)}
+.hint{font-family:var(--pixel);font-size:7.5px;opacity:.7;margin:10px 0 0;letter-spacing:.06em}
+.hint .touch{display:none}
+@media (hover:none){.hint .mouse{display:none}.hint .touch{display:inline}}
+
+.panels{display:flex;flex-direction:column;gap:8px;max-width:1240px;margin:0 auto}
+.panel{position:relative;display:block;text-decoration:none;overflow:hidden;border:2px solid rgba(255,255,255,.22);border-radius:3px;
+  height:84px;transition:height .45s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s,opacity .3s;background:transparent;cursor:pointer;color:#fff}
+.panel .art{position:absolute;inset:0;transition:opacity .5s,transform .8s}
+.panel .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.15) 70%)}
+.panel .inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:12px 14px 12px 64px}
+.panel .no{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--pixel);font-size:16px;opacity:.9;text-shadow:2px 2px 0 #000}
+.panel .nm{font-size:1.45rem;line-height:1.05;text-shadow:0 2px 8px #000}
+.panel .nm small{display:block;font-size:.62em;opacity:.9;margin-top:3px}
+.panel .more{max-height:0;opacity:0;overflow:hidden;transition:max-height .45s,opacity .3s}
+.panel .tg{font-size:.95rem;line-height:1.4;margin:8px 0 0;color:#eee;text-shadow:0 1px 6px #000;max-width:46ch}
+.panel .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.chip{font-family:var(--pixel);font-size:7px;letter-spacing:.06em;padding:5px 6px;border:1px solid currentColor;border-radius:2px;background:rgba(0,0,0,.5)}
+.panel .go{display:inline-block;margin-top:12px;font-family:var(--pixel);font-size:10px;padding:10px 12px;background:#fff;color:#000;letter-spacing:.06em;animation:blink 1.2s steps(1) infinite}
+.panel .go .touch{display:none}
+@media (hover:none){.panel .go .mouse{display:none}.panel .go .touch{display:inline}}
+.panel .badge{position:absolute;right:8px;top:8px;font-family:var(--pixel);font-size:6.5px;background:#fff;color:#000;padding:4px 5px;z-index:2}
+.panel.on{height:266px;border-color:#fff;box-shadow:0 0 0 2px #000,0 0 24px rgba(255,255,255,.35)}
+.panel.on .art{opacity:.08;transform:scale(1.06)}
+.panel.on .shade{background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0) 55%)}
+.panel.on .more{max-height:240px;opacity:1}
+.panels.has-on .panel:not(.on){opacity:.62}
+
+/* panel colours + mini art (independent of the previewed theme) */
+.p-noir .nm{font-family:'Playfair Display',serif;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.p-noir .nm small{font-style:italic;text-transform:none;font-weight:600;letter-spacing:0}
+.p-noir .art{background:repeating-linear-gradient(172deg,rgba(255,255,255,.14) 0 9px,transparent 9px 24px),radial-gradient(ellipse at 75% 15%,#8a8a8a,#222 55%,#050505)}
+.p-noir .chip{color:#fff}.p-noir.on{border-color:#fff}
+.p-speakeasy .nm{font-family:'Limelight',serif;color:#ffd99a}
+.p-speakeasy .art{background:repeating-linear-gradient(90deg,#3a1d0e 0 26px,#2c150a 26px 28px) 0 100%/100% 34% no-repeat,radial-gradient(circle at 20% 20%,rgba(255,170,70,.55),transparent 45%),linear-gradient(#1a0508,#5a1220)}
+.p-speakeasy .chip{color:#ffd99a}.p-speakeasy.on{border-color:#e0ae55;box-shadow:0 0 0 2px #000,0 0 24px rgba(224,174,85,.5)}
+.p-gotham .nm{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;text-transform:uppercase;font-size:1.75rem;color:#e3e9ff}
+.p-gotham .art{background:
+  linear-gradient(#040814,#040814) 6% 100%/13% 50% no-repeat,linear-gradient(#040814,#040814) 24% 100%/9% 78% no-repeat,
+  linear-gradient(#040814,#040814) 40% 100%/15% 42% no-repeat,linear-gradient(#040814,#040814) 60% 100%/8% 92% no-repeat,
+  linear-gradient(#040814,#040814) 76% 100%/14% 58% no-repeat,linear-gradient(#040814,#040814) 96% 100%/12% 70% no-repeat,
+  conic-gradient(from -20deg at 30% 100%,transparent 0 8deg,rgba(200,215,255,.3) 10deg 14deg,transparent 16deg),linear-gradient(180deg,#01040c,#1a3570)}
+.p-gotham .chip{color:#f3e6ae}.p-gotham.on{border-color:#c7d3f2;box-shadow:0 0 0 2px #000,0 0 24px rgba(160,190,255,.5)}
+.p-titanic .nm{font-family:'Cinzel',serif;font-weight:800;color:#f8f1e2}
+.p-titanic .nm small{color:#d4b06a}
+.p-titanic .art{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2060%2050%22%3E%3Cpath%20d%3D%22M2%2048L18%2020L26%2028L36%204L46%2024L58%2048Z%22%20fill%3D%22%23eef6ff%22/%3E%3C/svg%3E") 96% 76%/18% auto no-repeat,url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20300%2070%22%3E%3Cg%20fill%3D%22%23d39a4c%22%3E%3Cpath%20d%3D%22M95%2034h10l-3-22h-10zM131%2034h10l-3-22h-10zM167%2034h10l-3-22h-10zM203%2034h10l-3-22h-10z%22/%3E%3C/g%3E%3Cpath%20d%3D%22M50%2045V37H250V44Z%22%20fill%3D%22%23ebe4d1%22/%3E%3Cpath%20d%3D%22M17%2044L281%2040L272%2058L29%2058Q20%2054%2017%2044Z%22%20fill%3D%22%2305080f%22/%3E%3Cg%20fill%3D%22%23ffd68c%22%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2249%22%20r%3D%221%22/%3E%3Ccircle%20cx%3D%2290%22%20cy%3D%2249%22%20r%3D%221%22/%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%2248%22%20r%3D%221%22/%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%2248%22%20r%3D%221%22/%3E%3Ccircle%20cx%3D%22180%22%20cy%3D%2248%22%20r%3D%221%22/%3E%3Ccircle%20cx%3D%22210%22%20cy%3D%2247%22%20r%3D%221%22/%3E%3Ccircle%20cx%3D%22240%22%20cy%3D%2247%22%20r%3D%221%22/%3E%3C/g%3E%3C/svg%3E") 10% 78%/min(78%,420px) auto no-repeat,radial-gradient(circle at 80% 22%,#f7f0e1 0 8px,rgba(247,240,225,.25) 9px,transparent 30px),linear-gradient(transparent 75%,#030a18 75%),linear-gradient(180deg,#040b1d,#163063)}
+.p-titanic .chip{color:#d4b06a}.p-titanic.on{border-color:#d4b06a;box-shadow:0 0 0 2px #000,0 0 24px rgba(212,176,106,.5)}
+.p-gatsby .nm{font-family:'Poiret One',sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#f3d98e;font-weight:400}
+.p-gatsby .art{background:repeating-conic-gradient(from -90deg at 70% 100%,rgba(230,196,111,.45) 0 1.5deg,transparent 1.5deg 11deg),radial-gradient(ellipse at 70% 100%,#4a3a12,#000 65%)}
+.p-gatsby .chip{color:#e6c46f}.p-gatsby.on{border-color:#e6c46f;box-shadow:0 0 0 2px #000,0 0 24px rgba(230,196,111,.55)}
+
+@media (min-width:900px){
+  .panels{flex-direction:row;height:max(440px,calc(100vh - var(--hud-h) - 200px))}
+  .panel{height:auto;flex:1 1 0;min-width:0;transition:flex .5s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s,opacity .3s}
+  .panel.on{height:auto;flex:2.9 1 0}
+  .panel .shade{background:linear-gradient(0deg,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%)}
+  .panel .inner{justify-content:flex-end;padding:18px}
+  .panel .no{top:16px;left:16px;transform:none;font-size:20px}
+  .panel .nm{font-size:1.5rem}
+  .p-gotham .nm{font-size:1.9rem}
+  .panel.on .nm{font-size:2.3rem}.p-gotham.on .nm{font-size:3rem}
+  .panel .more{max-height:0}
+  .panel.on .more{max-height:300px}
+  .hub-head{margin-bottom:22px}
+}
+
+/* ============================== WORLD DETAIL ============================== */
+.detail{max-width:1160px;margin:0 auto;display:grid;gap:14px;grid-template-areas:"head" "cards" "vote"}
+.left{display:contents}
+.head{grid-area:head}.cards{grid-area:cards;display:grid;gap:14px}.vote-wrap{grid-area:vote}
+.back{font-family:var(--pixel);font-size:8px;letter-spacing:.06em;background:rgba(0,0,0,.6);border:1px solid var(--line);padding:9px 10px;cursor:pointer;margin-bottom:14px;text-decoration:none;display:inline-block;border-radius:2px}
+.world-no{font-family:var(--pixel);font-size:9px;letter-spacing:.12em;color:var(--accent);margin:0 0 10px;text-shadow:0 1px 0 #000}
+#t-name{font-family:var(--title);margin:0;line-height:1.02;text-shadow:0 3px 18px rgba(0,0,0,.85)}
+#t-name .n-main{display:block;font-size:clamp(2.3rem,11vw,4.6rem)}
+#t-name .n-sub{display:block;font-size:clamp(1rem,4.6vw,1.6rem);margin-top:8px;opacity:.92}
+#t-name .n-sub:empty{display:none}
+.tagline{font-size:1.02rem;line-height:1.45;margin:12px 0 0;color:var(--muted);max-width:40ch;text-shadow:0 1px 8px #000}
+.moods{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.moods .chip{color:var(--accent)}
+
+.card{background:var(--card);border:1px solid var(--line);padding:16px 16px 18px;position:relative;line-height:1.5}
+.card .tk{font-family:var(--pixel);font-size:7.5px;letter-spacing:.1em;color:var(--accent);padding-bottom:10px;margin-bottom:10px;border-bottom:1px dashed var(--line)}
+.card h2{font-family:var(--pixel);font-size:8.5px;letter-spacing:.12em;font-weight:400;color:var(--accent);margin:0 0 10px}
+.card h3{font-family:var(--pixel);font-size:7.5px;letter-spacing:.1em;font-weight:400;color:var(--ink);opacity:.85;margin:14px 0 6px}
+.card p{margin:0;font-size:1rem}
+.card .modest{margin-top:10px;font-size:.94rem;color:var(--muted)}
+.card .modest b{color:var(--ink);font-weight:600}
+
+/* mood board */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mb{position:relative;aspect-ratio:1;border:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.06);margin:0}
+.mb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.mb:hover img{transform:scale(1.06)}
+.mb figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 7px 6px;font-size:.8rem;line-height:1.2;color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.92),transparent);font-family:'Josefin Sans',sans-serif;font-weight:600}
+.story{font-size:1.06rem!important;line-height:1.65}
+.story::first-letter{float:left;font-family:var(--title);font-size:3.2em;line-height:.85;padding:4px 8px 0 0;color:var(--accent)}
+
+/* palette */
+.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sw i{display:block;aspect-ratio:1/1.2;border:1px solid var(--line)}
+.sw span{display:block;font-size:.72rem;line-height:1.2;margin-top:5px;color:var(--muted)}
+
+.hear{margin-top:12px;font-family:var(--pixel);font-size:8.5px;padding:11px 12px;background:transparent;border:1px solid var(--accent);color:var(--accent);cursor:pointer;border-radius:2px}
+.hear[aria-pressed=true]{background:var(--accent);color:var(--accent-ink)}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:10px;margin-right:6px;vertical-align:-1px}
+.eq i{width:2px;background:currentColor;height:30%}
+.hear[aria-pressed=true] .eq i{animation:eq .8s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s!important}.eq i:nth-child(3){animation-delay:-.6s!important}
+@keyframes eq{to{height:100%}}
+.stats{display:grid;grid-template-columns:auto 1fr;gap:7px 12px;margin:0;align-items:center}
+.stats dt{font-size:.9rem;color:var(--muted)}
+.stats dd{margin:0;display:flex;gap:4px}
+.pip{width:100%;max-width:30px;height:11px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+.pip.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 6px var(--accent)}
+.fine{font-size:.8rem;color:var(--muted);margin:2px 2px 0;text-shadow:0 1px 4px #000}
+.fine a{color:var(--accent)}
+
+/* vote button */
+.vote-wrap{position:sticky;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 8px);z-index:6}
+.vote-btn{display:block;width:100%;border:0;cursor:pointer;padding:15px 14px 13px;text-align:center;
+  background:var(--accent);color:var(--accent-ink);font-family:var(--pixel);font-size:13px;letter-spacing:.06em;line-height:1.4;
+  box-shadow:0 0 0 3px #000,0 0 0 5px var(--accent),0 8px 28px rgba(0,0,0,.7);border-radius:2px;transition:transform .12s}
+.vote-btn small{display:block;font-size:8px;margin-top:6px;opacity:.75;letter-spacing:.08em}
+.vote-btn:active{transform:translateY(2px)}
+body[data-phase=voting] .vote-btn{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 3px #000,0 0 0 5px var(--accent),0 0 26px 6px var(--accent)}}
+.vote-btn[aria-disabled=true]{background:rgba(0,0,0,.85);color:#fff;cursor:not-allowed;box-shadow:0 0 0 2px rgba(255,255,255,.55),0 8px 28px rgba(0,0,0,.7)}
+.vote-btn .lockt{color:var(--accent)}
+.vote-note{font-size:.86rem;margin:8px 0 0;padding:7px 10px;color:#fff;background:rgba(0,0,0,.85);text-align:center;line-height:1.4;border-radius:2px}
+.vote-note:empty{display:none}
+
+/* bottom world switcher */
+#select{position:fixed;left:0;right:0;bottom:0;z-index:20;height:calc(var(--nav-h) + env(safe-area-inset-bottom));
+  padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(0deg,rgba(0,0,0,.95),rgba(0,0,0,.75))}
+body[data-view=hub] #select{display:none}
+#all{height:48px;padding:0 9px;border:1px solid rgba(255,255,255,.45);background:transparent;cursor:pointer;font-family:var(--pixel);font-size:7px;line-height:1.6;color:#fff;border-radius:2px;flex:none;text-decoration:none;display:grid;place-items:center;text-align:center}
+#tiles{display:flex;gap:6px}
+.tile{width:48px;height:48px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.04);cursor:pointer;padding:0;border-radius:2px;position:relative;display:grid;place-items:center;color:#fff;transition:transform .15s}
+.tile svg{width:24px;height:24px}
+.tile span{position:absolute;top:2px;left:3px;font-family:var(--pixel);font-size:6px;opacity:.7}
+.tile[aria-current=true]{border:2px solid var(--accent);background:rgba(255,255,255,.12);transform:translateY(-4px);box-shadow:0 0 12px var(--accent)}
+.tile[aria-current=true] svg{color:var(--accent)}
+
+.detail.enter-l .head,.detail.enter-l .cards{animation:inL .45s cubic-bezier(.2,.8,.2,1) both}
+.detail.enter-r .head,.detail.enter-r .cards{animation:inR .45s cubic-bezier(.2,.8,.2,1) both}
+.detail.enter-u .head,.detail.enter-u .cards{animation:inU .5s cubic-bezier(.2,.8,.2,1) both}
+.detail .cards{animation-delay:.06s!important}
+@keyframes inL{from{opacity:0;transform:translateX(-40px)}}
+@keyframes inR{from{opacity:0;transform:translateX(40px)}}
+@keyframes inU{from{opacity:0;transform:translateY(30px) scale(.98)}}
+
+/* ============================== THEME VARIABLES ============================== */
+body[data-theme=hub]{--accent:#e6c46f;--accent-ink:#000}
+body[data-theme=noir]{--ink:#f4f4f4;--muted:#cdcdcd;--accent:#ffffff;--accent-ink:#000;--card:rgba(6,6,6,.86);--line:rgba(255,255,255,.4);
+  --title:'Playfair Display',Georgia,serif;--body:'Courier Prime',ui-monospace,monospace}
+body[data-theme=noir] #t-name{text-transform:uppercase;letter-spacing:.04em;font-weight:800;border-top:4px double #fff;border-bottom:4px double #fff;padding:12px 0;display:inline-block}
+body[data-theme=noir] #t-name .n-sub{font-style:italic;text-transform:none;letter-spacing:0;font-weight:600}
+body[data-theme=noir] .card{outline:1px solid rgba(255,255,255,.18);outline-offset:-6px}
+
+body[data-theme=speakeasy]{--ink:#f8e9d2;--muted:#e8cfaa;--accent:#e0ae55;--accent-ink:#2a0a0e;--card:rgba(38,9,13,.9);--line:rgba(224,174,85,.5);
+  --title:'Limelight',Georgia,serif;--body:'Cormorant Garamond',Georgia,serif}
+body[data-theme=speakeasy] #t-name{color:#ffd99a;text-shadow:0 0 18px rgba(255,170,60,.55),0 3px 0 #2a0a0e}
+body[data-theme=speakeasy] .card p,body[data-theme=speakeasy] body[data-theme=speakeasy] .card{border:2px solid var(--accent);box-shadow:inset 0 0 0 4px rgba(38,9,13,.9),inset 0 0 0 5px rgba(224,174,85,.4)}
+
+body[data-theme=gotham]{--ink:#e9eeff;--muted:#b6c3e6;--accent:#f3e6ae;--accent-ink:#071230;--card:rgba(4,10,28,.88);--line:rgba(170,190,240,.4);
+  --title:'Big Shoulders Display',Impact,sans-serif;--body:'Josefin Sans',system-ui,sans-serif}
+body[data-theme=gotham] #t-name{text-transform:uppercase;font-weight:900;letter-spacing:.02em;line-height:.92}
+body[data-theme=gotham] #t-name .n-main{font-size:clamp(2.8rem,14vw,6rem);background:linear-gradient(180deg,#fff 0%,#c7d3f2 55%,#7d8fbf 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px rgba(0,0,0,.9))}
+body[data-theme=gotham] .card{border-left:3px solid var(--accent)}
+
+body[data-theme=titanic]{--ink:#f8f1e2;--muted:#ddd2ba;--accent:#d4b06a;--accent-ink:#0b1a33;--card:rgba(8,20,42,.9);--line:rgba(212,176,106,.5);
+  --title:'Cinzel',Georgia,serif;--body:'Cormorant Garamond',Georgia,serif}
+body[data-theme=titanic] #t-name{font-weight:800;letter-spacing:.04em}
+body[data-theme=titanic] #t-name .n-sub{font-weight:600;letter-spacing:.06em;color:var(--accent)}
+body[data-theme=titanic] .card p,body[data-theme=titanic] body[data-theme=titanic] .card{padding-left:28px;border-radius:6px;background:radial-gradient(circle at 0 12px,transparent 5px,var(--card) 6px) 0 0/14px 24px repeat-y,var(--card)}
+body[data-theme=titanic] .card::before{content:"";position:absolute;left:14px;top:10px;bottom:10px;border-left:2px dashed var(--line)}
+
+body[data-theme=gatsby]{--ink:#f5e6bb;--muted:#dcc894;--accent:#e6c46f;--accent-ink:#0a0a0a;--card:rgba(6,6,4,.9);--line:rgba(230,196,111,.55);
+  --title:'Poiret One','Josefin Sans',sans-serif;--body:'Josefin Sans',system-ui,sans-serif}
+body[data-theme=gatsby] #t-name{text-transform:uppercase;letter-spacing:.1em;font-weight:400;color:#f3d98e;text-shadow:0 0 1px #f3d98e,0 0 22px rgba(230,196,111,.45),0 3px 10px #000}
+body[data-theme=gatsby] #t-name .n-sub{letter-spacing:.2em;color:#fff}
+body[data-theme=gatsby] .card{border:1px solid var(--accent);outline:1px solid var(--line);outline-offset:4px;margin:5px}
+body[data-theme=gatsby] .card::before,body[data-theme=gatsby] .card::after{content:"";position:absolute;width:22px;height:22px;border:2px solid var(--accent)}
+body[data-theme=gatsby] .card::before{top:-7px;left:-7px;border-right:0;border-bottom:0}
+body[data-theme=gatsby] .card::after{bottom:-7px;right:-7px;border-left:0;border-top:0}
+
+/* ============================== OVERLAYS ============================== */
+#wipe{position:fixed;inset:0;z-index:40;pointer-events:none;background:#000;transform:translateX(-101%);display:grid;place-items:center}
+#wipe span{font-family:var(--pixel);font-size:11px;color:#fff;letter-spacing:.1em;text-align:center;padding:0 20px;line-height:1.8}
+#wipe.run{animation:wipe .56s steps(9) both}
+@keyframes wipe{0%{transform:translateX(-101%)}42%,58%{transform:translateX(0)}100%{transform:translateX(101%)}}
+
+#splash{position:fixed;inset:0;z-index:60;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  text-align:center;padding:24px;cursor:pointer;border:0;width:100%;color:#fff;transition:opacity .5s,visibility .5s}
+#splash.gone{opacity:0;visibility:hidden}
+#splash::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px)}
+.sp-pre{font-family:var(--pixel);font-size:9px;letter-spacing:.2em;color:#e6c46f}
+.sp-title{font-family:var(--pixel);font-size:clamp(16px,5.4vw,34px);line-height:1.5;margin:0;text-shadow:3px 3px 0 #6b2131,6px 6px 0 #0d1d44}
+.sp-chips{display:flex;gap:6px}.sp-chips i{width:22px;height:8px;display:block}
+.sp-start{font-family:var(--pixel);font-size:13px;animation:blink 1.1s steps(1) infinite;margin-top:14px}
+.sp-start small{display:block;font-size:8px;margin-top:10px;opacity:.7}
+.sp-meta{font-family:var(--pixel);font-size:7.5px;line-height:2;opacity:.6;letter-spacing:.08em}
+
+#unlock{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;cursor:pointer;border:0;width:100%;color:#fff;padding:24px}
+#unlock[hidden]{display:none}
+#unlock svg{width:96px;height:120px;color:var(--accent)}
+#unlock .shackle{transform-origin:70px 52px;animation:shackle .7s .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes shackle{to{transform:translateY(-14px) rotate(-28deg)}}
+.un-t{font-family:var(--pixel);font-size:clamp(16px,5vw,28px);color:var(--accent);text-shadow:0 0 20px var(--accent);animation:pop .5s .9s both}
+.un-s{font-family:var(--pixel);font-size:9px;line-height:2;opacity:.85;animation:pop .5s 1.1s both}
+@keyframes pop{from{opacity:0;transform:scale(.6)}}
+#unlock .flash{position:absolute;inset:0;background:#fff;opacity:0;animation:flash .6s .85s ease-out both;pointer-events:none}
+@keyframes flash{0%{opacity:0}15%{opacity:.5}100%{opacity:0}}
+
+#password{position:fixed;z-index:35;left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,86vw);pointer-events:none;
+  background:#130406;border:3px solid #e0ae55;padding:18px 16px;text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;color:#f8e9d2;box-shadow:0 0 0 6px #2a0a0e,0 20px 60px #000;opacity:0;visibility:hidden}
+#password.show{animation:slot 2.2s ease both;visibility:visible}
+#password .slot{height:20px;background:#000;border:2px solid #e0ae55;margin:0 auto 12px;width:60%;overflow:hidden;position:relative}
+#password .slot::after{content:"";position:absolute;left:30%;top:6px;width:40%;height:6px;background:radial-gradient(circle at 25% 50%,#ffd99a 2px,transparent 3px),radial-gradient(circle at 75% 50%,#ffd99a 2px,transparent 3px)}
+#password p{margin:4px 0;font-size:1.15rem}
+#password .pw2{color:#e0ae55;font-family:'Limelight',serif;font-size:1.05rem}
+@keyframes slot{0%{opacity:0;transform:translate(-50%,-40%)}12%,80%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(-50%,-56%)}}
+
+/* Modal */
+#modal{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.8);display:flex;align-items:flex-end;justify-content:center}
+#modal[hidden]{display:none}
+.dlg{width:100%;max-width:460px;max-height:92vh;overflow:auto;background:#0b0b0b;border:2px solid var(--accent);border-bottom:0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));
+  font-family:'Josefin Sans',system-ui,sans-serif;color:#fff;animation:up .3s ease both}
+@media(min-width:600px){#modal{align-items:center}.dlg{border-bottom:2px solid var(--accent)}}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.dlg h2{font-family:var(--pixel);font-size:12px;line-height:1.6;color:var(--accent);margin:0 0 6px;letter-spacing:.04em}
+.dlg .for{margin:0 0 16px;font-size:.98rem;color:#ddd}
+.dlg .for b{color:#fff}
+.dlg label{display:block;font-family:var(--pixel);font-size:8px;letter-spacing:.08em;margin:14px 0 7px;color:#ddd}
+.dlg label small{font-family:'Josefin Sans',sans-serif;font-size:.8rem;letter-spacing:0;opacity:.7}
+.dlg input{width:100%;font:600 1.1rem 'Josefin Sans',sans-serif;padding:12px;background:#000;color:#fff;border:2px solid #555;border-radius:2px}
+.dlg input:focus{border-color:var(--accent);outline:none}
+.dlg .err{background:#3a0b0b;border-left:4px solid #ff5a5a;padding:10px 12px;margin:14px 0 0;font-size:.95rem;line-height:1.4}
+.dlg .err:empty{display:none}
+.row{display:flex;gap:10px;margin-top:20px}
+.btn{flex:1;font-family:var(--pixel);font-size:10px;line-height:1.5;padding:14px 10px;border:2px solid var(--accent);background:transparent;color:#fff;cursor:pointer;border-radius:2px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn[disabled]{opacity:.5;cursor:wait}
+.warn{border:2px dashed #ff5a5a;padding:12px;margin:12px 0 0;line-height:1.45;font-size:.98rem}
+.warn b{font-family:var(--pixel);font-size:9px;color:#ff7a7a;display:block;margin-bottom:6px}
+.sum{margin:12px 0 0;padding:12px;background:#151515;line-height:1.7;font-size:.98rem}
+.ach{text-align:center}
+.ach .trophy{width:84px;height:84px;margin:6px auto 10px;display:block;color:var(--accent);animation:pop .6s both}
+.ach .badge{display:inline-block;font-family:var(--pixel);font-size:8px;letter-spacing:.12em;background:var(--accent);color:var(--accent-ink);padding:6px 8px;margin-bottom:12px}
+.ach h2{font-size:15px}
+.ach p{line-height:1.5}
+
+/* ============================== DESKTOP ============================== */
+@media (min-width:900px){
+  body{--hud-h:118px}
+  .digits b{font-size:30px}.digits .colon{font-size:26px}.digits i{font-size:7px}
+  .hud-brand{font-size:9px}
+  main{padding-left:24px;padding-right:24px}
+  .detail{grid-template-columns:.95fr 1.05fr;grid-template-areas:"left cards";gap:20px 48px;margin-top:2vh;align-items:start}
+  .left{display:block;grid-area:left;position:sticky;top:calc(var(--hud-h) + 20px)}
+  .vote-wrap{position:static;max-width:440px;margin-top:26px}
+  .tagline{font-size:1.15rem}
+  .card{padding:22px 22px 24px}
+  .tile{width:56px;height:56px}
+  .board{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-height:640px) and (max-width:899px){#t-name .n-main{font-size:2rem}}
+
+/* ============================== REDUCED MOTION ============================== */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .digits .colon,.sp-start,.panel .go{animation:none!important}
+  .s-gotham .light{transform:rotate(-12deg)}.s-gotham .g2{transform:rotate(14deg)}
+}
+</style>
+</head>
+<body data-theme="hub" data-phase="showcase" data-view="hub">
+<a class="skip" href="#main">Skip to the worlds</a>
+
+<!-- ======================= BACKGROUND WORLDS ======================= -->
+<div id="scenes" aria-hidden="true">
+  <div class="scene s-hub on" data-s="hub"><div class="sun"></div><div class="floor"></div></div>
+  <div class="scene s-noir" data-s="noir">
+    <div class="beam"></div><div class="blinds"></div>
+    <svg viewBox="0 0 120 400" fill="#000"><path d="M56 400V150h8v250zM44 150h32l-6-26H50zM50 124h20v-6H50zM58 118v-30h4v30z"/><circle cx="60" cy="140" r="9" fill="#fff" opacity=".85"/><circle cx="60" cy="140" r="28" fill="#fff" opacity=".08"/><path d="M30 400h60v-8H30z"/></svg>
+  </div>
+  <div class="scene s-speakeasy" data-s="speakeasy">
+    <div class="lamp l1"></div><div class="lamp l2"></div><div class="wood"></div>
+    <svg viewBox="0 0 200 220" fill="#0e0303"><path d="M40 180h120v12H40zM55 192h90v22H55zM60 150h80v30H60z"/><path d="M96 150c0-30 4-52 18-70l8 4c-12 16-16 36-16 66z"/><path d="M110 82C120 40 160 10 196 6c4 30-10 66-44 86-18 10-34 8-42-10z" fill="#3a1408" stroke="#b8873a" stroke-width="2"/><circle cx="100" cy="150" r="30" fill="none" stroke="#b8873a" stroke-width="2" opacity=".6"/></svg>
+  </div>
+  <div class="scene s-gotham" data-s="gotham">
+    <div class="moonhaze"></div><div class="light g1"></div><div class="light g2"></div>
+    <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice">
+      <defs><pattern id="win" width="14" height="18" patternUnits="userSpaceOnUse"><rect x="4" y="5" width="4" height="6" fill="#f3d27a" opacity=".55"/></pattern>
+      <pattern id="win2" width="22" height="26" patternUnits="userSpaceOnUse"><rect x="6" y="8" width="4" height="7" fill="#f3d27a" opacity=".35"/></pattern></defs>
+      <g fill="#040814">
+        <path d="M0 400V250h60v-30h40v180zM90 400V180h20v-20h10v-40h4v40h10v20h20v220zM170 400V230h70v170zM240 400V140l20-20h10V70l6-30 6 30v50h10l20 20v260z"/>
+        <path d="M330 400V210h30v-20h50v20h30v190zM440 400V100h12V80h12V50h8V10h4v40h8v30h12v20h12v300zM520 400V260h80v140zM600 400V170l40-40 40 40v230z"/>
+        <path d="M680 400V120h20v-30h40v30h20v280zM760 400V230h60v170zM820 400V60l10-20h4V0h4v40h4l10 20v340zM870 400V200h90v200zM960 400V150h30v-30l20-20 20 20v30h30v250zM1060 400V240h60v-40h40v200zM1150 400V170h50v230z"/>
+      </g>
+      <g fill="url(#win)"><rect x="240" y="150" width="70" height="250"/><rect x="440" y="110" width="60" height="290"/><rect x="820" y="70" width="48" height="330"/><rect x="960" y="160" width="100" height="240"/></g>
+      <g fill="url(#win2)"><rect x="90" y="190" width="70" height="210"/><rect x="600" y="175" width="80" height="225"/><rect x="680" y="130" width="80" height="270"/><rect x="330" y="220" width="110" height="180"/></g>
+    </svg>
+  </div>
+  <div class="scene s-titanic" data-s="titanic">
+    <div class="moon"></div><div class="stars"></div>
+    <svg class="ship" viewBox="0 0 1000 230" aria-hidden="true">
+      <defs>
+        <pattern id="port" width="13" height="11" patternUnits="userSpaceOnUse"><circle cx="6" cy="5" r="1.7" fill="#ffd68c"/></pattern>
+        <pattern id="cabin" width="16" height="10" patternUnits="userSpaceOnUse"><rect x="4" y="3" width="7" height="4" fill="#ffcf7a"/></pattern>
+        <clipPath id="hullclip"><path d="M58 146 L936 134 L908 196 L96 196 Q68 182 58 146Z"/></clipPath>
+      </defs>
+      <g fill="#cfd6e4" opacity=".5"><ellipse class="puff p0" cx="326" cy="30" rx="18" ry="10"/><ellipse class="puff p1" cx="446" cy="30" rx="18" ry="10"/><ellipse class="puff p2" cx="566" cy="30" rx="18" ry="10"/></g>
+      <g stroke="#9aa6bd" stroke-width="2.5"><path d="M150 142V12M862 136V16"/></g>
+      <g stroke="#9aa6bd" stroke-width="1" opacity=".55" fill="none"><path d="M150 14L862 18M150 14L60 144M862 18L936 132"/></g>
+      <path d="M318 114h36l-10-74h-36z" fill="#d39a4c"/><path d="M308 40h36l1.6 12h-36z" fill="#0b0f18"/><path d="M438 114h36l-10-74h-36z" fill="#d39a4c"/><path d="M428 40h36l1.6 12h-36z" fill="#0b0f18"/><path d="M558 114h36l-10-74h-36z" fill="#d39a4c"/><path d="M548 40h36l1.6 12h-36z" fill="#0b0f18"/><path d="M678 114h36l-10-74h-36z" fill="#d39a4c"/><path d="M668 40h36l1.6 12h-36z" fill="#0b0f18"/>
+      <path d="M168 150V126H836V146Z" fill="#ebe4d1"/>
+      <path d="M250 126V110H770V126Z" fill="#ebe4d1"/>
+      <rect x="772" y="98" width="44" height="12" fill="#ebe4d1"/>
+      <g fill="#f6f1e4"><rect x="268" y="103" width="24" height="7" rx="3"/><rect x="300" y="103" width="24" height="7" rx="3"/><rect x="392" y="103" width="24" height="7" rx="3"/><rect x="512" y="103" width="24" height="7" rx="3"/><rect x="600" y="103" width="24" height="7" rx="3"/><rect x="632" y="103" width="24" height="7" rx="3"/><rect x="722" y="103" width="24" height="7" rx="3"/></g>
+      <rect x="176" y="132" width="652" height="12" fill="url(#cabin)" opacity=".9"/>
+      <rect x="258" y="114" width="504" height="9" fill="url(#cabin)" opacity=".75"/>
+      <path d="M58 146 L936 134 L908 196 L96 196 Q68 182 58 146Z" fill="#0a0e17" stroke="#2c3549" stroke-width="1.5"/>
+      <path d="M66 152 L928 140" stroke="#d4b06a" stroke-width="1.6" opacity=".75"/>
+      <g clip-path="url(#hullclip)"><rect x="80" y="157" width="840" height="24" fill="url(#port)"/></g>
+      <text x="868" y="152" fill="#d4b06a" font-family="Cinzel,serif" font-size="9" letter-spacing="1">TITANIC</text>
+    </svg>
+    <svg class="berg" viewBox="0 0 200 170" aria-hidden="true">
+      <path d="M8 160 L52 74 L74 96 L104 22 L136 80 L158 62 L194 160Z" fill="#eef6ff"/>
+      <path d="M104 22 L136 80 L158 62 L194 160 L124 160 L118 96Z" fill="#b8d2ee"/>
+      <path d="M52 74 L74 96 L60 160 L8 160Z" fill="#d6e6f8"/>
+    </svg>
+    <svg class="sea" viewBox="0 0 1200 160" preserveAspectRatio="none">
+      <rect width="1200" height="160" fill="#030a18"/>
+      <g class="shimmer" stroke="#ffd68c" stroke-width="2" opacity=".45" stroke-linecap="round"><path d="M220 18h120M300 34h60M260 54h160M380 76h40M330 98h100M600 22h80M640 46h40M700 70h60"/></g>
+      <g stroke="#8aa6d8" stroke-width="1" opacity=".25"><path d="M0 20q150-14 300 0t300 0 300 0 300 0M0 70q150-14 300 0t300 0 300 0 300 0M0 120q150-14 300 0t300 0 300 0 300 0"/></g>
+    </svg>
+  </div>
+  <div class="scene s-gatsby" data-s="gatsby">
+    <div class="water"></div><div class="green"></div>
+    <svg class="fan" viewBox="0 0 800 420" fill="none" stroke="#e6c46f">
+      <g stroke-width="1.5"><path d="M400 420 400 20M400 420 260 40M400 420 540 40M400 420 140 100M400 420 660 100M400 420 50 190M400 420 750 190M400 420 0 300M400 420 800 300"/></g>
+      <g stroke-width="3"><path d="M100 420a300 300 0 0 1 600 0"/><path d="M180 420a220 220 0 0 1 440 0"/><path d="M260 420a140 140 0 0 1 280 0"/></g>
+      <g stroke-width="1.5"><path d="M40 420a360 360 0 0 1 720 0"/><path d="M320 420a80 80 0 0 1 160 0"/></g>
+      <path d="M400 0l14 24-14 24-14-24z" fill="#e6c46f"/>
+    </svg>
+  </div>
+  <canvas id="fx"></canvas>
+  <div class="vignette"></div>
+</div>
+
+<!-- ======================= HUD ======================= -->
+<header id="hud">
+  <div class="hud-top">
+    <span class="hud-brand">MALAM INSPIRASI<br>ASPUTRA 2027</span>
+    <span id="demo" hidden>DEMO MODE<br>VOTES NOT SAVED</span>
+    <button id="sound" type="button" aria-pressed="false" aria-label="Ambient sound">♪ SOUND OFF</button>
+  </div>
+  <div id="clock-label" aria-hidden="true"></div>
+  <div class="digits" aria-hidden="true">
+    <span><b id="cd-d">00</b><i>DAYS</i></span><span class="colon">:</span>
+    <span><b id="cd-h">00</b><i>HRS</i></span><span class="colon">:</span>
+    <span><b id="cd-m">00</b><i>MIN</i></span><span class="colon">:</span>
+    <span><b id="cd-s">00</b><i>SEC</i></span>
+  </div>
+  <p id="clock-sr" class="sr-only" role="status"></p>
+</header>
+
+<main id="main">
+  <!-- ======================= HUB: WORLD SELECT ======================= -->
+  <section id="hub" aria-labelledby="hub-title">
+    <div class="hub-head">
+      <h1 id="hub-title" tabindex="-1">SELECT YOUR WORLD</h1>
+      <p class="bm">PILIH DUNIA ANDA</p>
+      <p class="hub-status" id="hub-status"></p>
+      <p class="hint"><span class="mouse">HOVER TO PREVIEW · CLICK TO ENTER</span><span class="touch">TAP TO PREVIEW · TAP AGAIN TO ENTER</span></p>
+    </div>
+    <div class="panels" id="panels"></div>
+  </section>
+
+  <!-- ======================= WORLD DETAIL ======================= -->
+  <section id="world" aria-label="World details">
+    <div class="detail" id="detail">
+      <div class="left">
+        <div class="head">
+          <a class="back" href="#worlds">◀ ALL WORLDS</a>
+          <p class="world-no" id="world-no">WORLD 01 / 05</p>
+          <h1 id="t-name" tabindex="-1"><span class="n-main"></span><span class="n-sub"></span></h1>
+          <p class="tagline" id="t-tag"></p>
+          <div class="moods" id="t-moods"></div>
+        </div>
+        <div class="vote-wrap">
+          <button class="vote-btn" id="vote-btn" type="button"></button>
+          <p class="vote-note" id="vote-note"></p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="tk" id="t-tk"></div>
+          <h2>THE WORLD</h2>
+          <p id="t-world"></p>
+        </article>
+        <article class="card">
+          <h2>THE STORY</h2>
+          <p class="story" id="t-story"></p>
+        </article>
+        <article class="card">
+          <h2>MOOD BOARD</h2>
+          <div class="board" id="t-board"></div>
+        </article>
+        <article class="card">
+          <h2>COLOUR PALETTE</h2>
+          <div class="palette" id="t-palette"></div>
+        </article>
+        <article class="card">
+          <h2>DRESS CODE</h2>
+          <p id="t-dress"></p>
+          <p class="modest" id="t-modest"></p>
+        </article>
+        <article class="card">
+          <h2>THE SOUND OF THIS WORLD</h2>
+          <p id="t-sound"></p>
+          <button class="hear" id="hear" type="button" aria-pressed="false"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="hear-t">HEAR THIS WORLD</span></button>
+        </article>
+        <article class="card">
+          <h2>WORLD STATS</h2>
+          <dl class="stats" id="t-stats"></dl>
+        </article>
+        <p class="fine">All mood board photos are public domain or CC0: free to use, no copyright, no credit needed.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav id="select" aria-label="Switch world">
+  <a id="all" href="#worlds" aria-label="Back to all worlds">ALL<br>WORLDS</a>
+  <div id="tiles"></div>
+</nav>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<div id="wipe" aria-hidden="true"><span id="wipe-t">LOADING</span></div>
+
+<div id="password" aria-hidden="true">
+  <div class="slot"></div>
+  <p>*knock knock* … What's the password?</p>
+  <p class="pw2">“ASPer22.” Come on in.</p>
+</div>
+
+<button id="splash" type="button" aria-label="Enter the site">
+  <span class="sp-pre">ASPER22 PRESENTS</span>
+  <span class="sp-title">MALAM INSPIRASI<br>ASPUTRA 2027</span>
+  <span class="sp-chips" aria-hidden="true"><i style="background:#ddd"></i><i style="background:#8e1b2c"></i><i style="background:#1a3570"></i><i style="background:#efe4cc"></i><i style="background:#e6c46f"></i></span>
+  <span class="sp-pre" style="color:#fff">5 WORLDS · 1 NIGHT · YOU DECIDE</span>
+  <span class="sp-start">PRESS START<small>Tekan untuk masuk</small></span>
+  <span class="sp-meta" style="opacity:.8">♪ SOUND ON · MUTE ANYTIME (TOP RIGHT)</span>
+  <span class="sp-meta">23.04.2027 · DEWAN BANKUET UPM<br>HICOM ASPER22</span>
+</button>
+
+<button id="unlock" type="button" hidden aria-label="Voting is now open. Continue.">
+  <span class="flash"></span>
+  <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="8" aria-hidden="true"><path class="shackle" d="M28 54V36a22 22 0 0 1 44 0v18"/><rect x="14" y="54" width="72" height="56" rx="4" fill="currentColor"/><path d="M50 74v16" stroke="#000"/></svg>
+  <span class="un-t">VOTING UNLOCKED</span>
+  <span class="un-s">UNDIAN KINI DIBUKA<br>PICK YOUR WORLD · TAP TO CONTINUE</span>
+</button>
+
+<div id="modal" hidden><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dlg-title" id="dlg"></div></div>
+
+<script>
+(() => {
+'use strict';
+
+/* =====================================================================
+   CONFIG: the only part HiCom needs to edit.
+   Once Supabase is connected, the voting window comes from the
+   database (vote_settings table), so keep these the same as there.
+   ===================================================================== */
+const CONFIG = {
+  VOTING_OPENS:  "2026-11-27T20:00:00+08:00",
+  VOTING_CLOSES: "2026-12-02T23:59:00+08:00",
+  DINNER_AT:     "2027-04-23T20:00:00+08:00",   // countdown target after voting closes
+  SUPABASE_URL:      "https://jkmhnzpquchofxquelzn.supabase.co",                         // e.g. "https://abcdefgh.supabase.co"
+  SUPABASE_ANON_KEY: "sb_publishable_SL3lz8CAtkioi-VVkHS8Og_lIwQuTb-",                         // Settings > API Keys > publishable / anon key
+  SITE_URL: "https://kimbergz.github.io/malam-inspirasi/"
+};
+
+/* ============================ THEMES ============================ */
+const STAT_NAMES = ['Glamour','Mystery','Colour','Party energy','Easy to dress for'];
+const THEMES = [
+  { id:1, key:'noir', name:'Film Noir', sub:'An Evening in Black & White',
+    tag:'1940s Hollywood glamour, monochrome formalwear, dramatic lighting and vintage cinema.',
+    tk:'PICTURE NO. 1 · PRINTED IN BLACK & WHITE',
+    moods:['SMOKY','MYSTERIOUS','CINEMATIC','TIMELESS','SHARP'],
+    world:'The projector rattles to life. Rain on the window, smoke in the spotlight, and every guest is a star in a picture that was never released. Colour is banned tonight, and every shadow has a story.',
+    photos:[["img/noir-1.jpg", "The fedora", "https://live.staticflickr.com/65535/49088852877_e5e2961fac.jpg"], ["img/noir-2.jpg", "Rain on the window", "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL2ZycmFpbl9kcmlwX3dpbmRvd185MDkxMzQtaW1hZ2Uta3liYXZrdmcuanBn.jpg"], ["img/noir-3.jpg", "The projector", "https://live.staticflickr.com/4330/36164745991_98ebfb6b99_b.jpg"], ["img/noir-4.jpg", "The detective’s typewriter", "https://cdn.stocksnap.io/img-thumbs/960w/OU6YNJ0RV7.jpg"], ["img/noir-5.jpg", "Streetlamp in the fog", "https://live.staticflickr.com/418/32059102551_601bc70fa7_b.jpg"], ["img/noir-6.jpg", "Film reels", "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAzL2ZyYWJnZXdpY2tlbHRfZW50d2lja2VsdC1pbWFnZS5qcGc.jpg"]],
+    palette:[['#0b0b0b','Ink black'],['#3a3a3a','Gunmetal'],['#8c8c8c','Silver screen'],['#d9d9d9','Pearl grey'],['#ffffff','Spotlight white']],
+    dress:'Strictly black, white and grey. Sharp suits, slim ties, braces and fedoras; satin gowns, long gloves and pearls.',
+    modest:'A monochrome baju kurung or a long satin abaya with a pearl brooch fits right in.',
+    story:"It has been raining since dusk, the kind of rain that turns streetlamps into halos and makes every footstep sound like a secret. You step out of the taxi and the world loses its colour: your coat, the pavement, the long line of guests waiting under one blinding spotlight. Somewhere inside, a projector clicks on. Light cuts through the haze in slow silver stripes. A pianist plays something sad and beautiful, and a stranger in pearls glances your way as if she already knows why you came. Nobody tells the whole truth tonight. Everyone looks like the lead. And when the credits finally roll, you’ll swear the whole evening was filmed in black and white.",
+    sound:'1940s big-band swing, smoky torch songs and slow jazz piano, with the hum of an old projector between sets.',
+    stats:[4,5,1,2,4] },
+  { id:2, key:'speakeasy', name:'The Speakeasy', sub:'',
+    tag:'Prohibition-era nightlife, 1920s formalwear, jazz, velvet and underground sophistication.',
+    tk:'MEMBERS ONLY · KNOCK TWICE',
+    moods:['SECRET','WARM','SWINGING','VELVET','REBELLIOUS'],
+    world:'Knock twice, whisper the password and the bookcase swings open. Down here the band never stops, the velvet runs deep red, and the dance floor belongs to whoever is bold enough to take it.',
+    photos:[["img/speakeasy-1.jpg", "Deep velvet curtains", "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvYTAxMC1tYXJrdXNzLTEzNDAuanBn.jpg"], ["img/speakeasy-2.jpg", "Lamplight and old books", "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgyMjA0LWltYWdlLWt3dnhuM29mLmpwZw.jpg"], ["img/speakeasy-3.jpg", "The door with no sign", "https://pd.w.org/2024/02/27065c0a641aa11a2.34479682-2048x1365.jpg"], ["img/speakeasy-4.jpg", "The saxophone solo", "https://live.staticflickr.com/5742/20311658263_060aa39549_b.jpg"], ["img/speakeasy-5.jpg", "The gramophone", "https://live.staticflickr.com/9/11817215_e93f9a0d7c_b.jpg"], ["img/speakeasy-6.jpg", "Candlelight", "https://live.staticflickr.com/1477/24857435811_e48ef809a5_b.jpg"]],
+    palette:[['#3d0c15','Bordeaux'],['#7a1f2d','Velvet red'],['#3a1d0e','Dark walnut'],['#b8873a','Brass'],['#ffd99a','Lamp amber']],
+    dress:'Pinstripes, waistcoats, braces and flat caps; fringed or beaded dresses, feather headbands and T-bar heels. Burgundy, emerald and brass.',
+    modest:'A beaded long dress, or a jewel-toned kurung with a feather pin on the shawl.',
+    story:"There’s no sign on the door. You only found it because someone slipped you a card with three words on it, and now you’re standing in a dark alley, knocking twice, then once more. A small panel slides open. A pair of eyes looks you up and down. You whisper the password. The door swings inward and the warm air hits you all at once: brass, velvet, candle wax, and a trumpet climbing higher than the ceiling should allow. Upstairs, the city is following the rules. Down here, nobody has heard of them. The floor is already full of people who learned the Charleston an hour ago and dance like they invented it. Pull up a chair. Nobody leaves early.",
+    sound:'Hot jazz, swing and ragtime piano: brushed drums, a walking bass and a trumpet solo or two.',
+    stats:[4,4,3,3,2] },
+  { id:3, key:'gotham', name:'A Night in Gotham', sub:'',
+    tag:'Dark metropolitan elegance, Art Deco architecture, black-tie fashion and cinematic mystery.',
+    tk:'CASE FILE · AFTER DARK',
+    moods:['MOODY','ELECTRIC','SLEEK','URBAN','CINEMATIC'],
+    world:'The city never sleeps; it just dims the lights. Searchlights sweep across Art Deco towers, rain shines on the streets, and the most dangerous thing in the room is how well everyone is dressed.',
+    photos:[["img/gotham-1.jpg", "The skyline at dawn", "https://live.staticflickr.com/8139/30344744825_430b485984_b.jpg"], ["img/gotham-2.jpg", "Art Deco spires", "https://live.staticflickr.com/3215/5823425338_8b671f03cb.jpg"], ["img/gotham-3.jpg", "Searchlights over the harbour", "https://live.staticflickr.com/65535/55315658584_8b11ef2da2_b.jpg"], ["img/gotham-4.jpg", "Rain-slick streets", "https://live.staticflickr.com/4917/31035003877_d2d2818ba3_b.jpg"], ["img/gotham-5.jpg", "Towers in the fog", "https://live.staticflickr.com/64/166257175_f4e938f4d5_b.jpg"], ["img/gotham-6.jpg", "The city that never sleeps", "https://live.staticflickr.com/5700/23347480891_364c91ec28_b.jpg"]],
+    palette:[['#01040c','Midnight'],['#0d1d44','City blue'],['#4a5a80','Steel'],['#c7d3f2','Silver'],['#f3e6ae','Searchlight']],
+    dress:'Black tie, after dark. Tuxedos, long coats and gloves; sleek gowns in black, midnight blue or charcoal with silver accents.',
+    modest:'A structured long coat-dress, or a dark satin kurung with silver details.',
+    story:"The city looks different from up here. Searchlights sweep the clouds in slow arcs, and the rain has turned every street below into a river of reflected gold. You came dressed for trouble: black tie, long coat, collar up. The lift doors open on a room full of people who look like they’re keeping secrets, and most of them probably are. Someone by the window watches the skyline as if it might answer back. The band plays low and cool. Every conversation feels like the start of a mystery, every glance across the room like a clue. Out there, the city is wide awake. In here, it’s having the most elegant night it has ever seen.",
+    sound:'Brooding orchestral scores, cool jazz and cinematic strings, all over the sound of rain.',
+    stats:[3,4,2,3,4] },
+  { id:4, key:'titanic', name:'Titanic', sub:'An Evening Aboard the RMS Titanic',
+    tag:'Edwardian high society, grand staircases, elaborate evening gowns and tailored formalwear.',
+    tk:'BOARDING PASS · FIRST CLASS · ADMIT ONE',
+    moods:['GRAND','ELEGANT','ROMANTIC','OPULENT','TIMELESS'],
+    world:'April 1912. The orchestra is playing, the chandeliers are lit and the grand staircase is the place to be seen. One evening of Edwardian high society in the first-class saloon, far out on a calm, dark Atlantic.',
+    photos:[["img/titanic-1.jpg", "The grand staircase", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Grand_Staircase_aboard_the_RMS_Olympic_%28William_H._Rau_1911%29.jpg/960px-Grand_Staircase_aboard_the_RMS_Olympic_%28William_H._Rau_1911%29.jpg"], ["img/titanic-2.jpg", "The ship at her berth, 1912", "https://live.staticflickr.com/65535/50669545331_e07ab59eb0_b.jpg"], ["img/titanic-3.jpg", "The dining saloon", "https://live.staticflickr.com/65535/50713509113_d3dca580cd_b.jpg"], ["img/titanic-4.jpg", "The lounge", "https://live.staticflickr.com/65535/50489047223_655f76664e_b.jpg"], ["img/titanic-5.jpg", "The promenade deck", "https://live.staticflickr.com/65535/50489047728_883e63e253_b.jpg"], ["img/titanic-6.jpg", "Crystal chandeliers", "https://live.staticflickr.com/1665/24165565555_c7985b3f72_b.jpg"]],
+    palette:[['#0b1a33','Atlantic navy'],['#16294d','Midnight sea'],['#efe4cc','Ivory'],['#d4b06a','Polished brass'],['#7a1f2b','Claret']],
+    dress:'Tailcoats or three-piece suits, white or black tie; floor-length gowns, long gloves, pearls and elegant updos. Navy, ivory and gold.',
+    modest:'Floor-length is already the rule here. Add gloves and a pearl-trimmed shawl or tudung.',
+    story:"Southampton is only a memory now. Three days out, the Atlantic is calm and black as ink, and the stars hang so low they seem to rest on the rigging. Inside, the first-class saloon glows. Chandeliers pour light over polished oak and white linen, and gowns whisper down the grand staircase as guests pause on every step just long enough to be seen. The orchestra slips into a waltz. Someone laughs beneath the great clock. You straighten your gloves, take a breath, and step into the most glamorous room on the most famous ship in the world. Outside, the sea is perfectly still, and nobody is watching the water. Tonight is only about the music, the light, and the people you came aboard with.",
+    sound:'A string quartet and a ragtime orchestra: waltzes, light classical and the occasional ship’s bell.',
+    stats:[5,2,4,3,2] },
+  { id:5, key:'gatsby', name:'The Great Gatsby', sub:'A Royal Ball',
+    tag:'Roaring Twenties extravagance, champagne gold, flapper dresses and Art Deco glamour.',
+    tk:'YOU ARE CORDIALLY INVITED',
+    moods:['LAVISH','GOLDEN','GLITTERING','WILD','ELECTRIC'],
+    world:'The mansion doors are open and everyone is invited. Gold on black, confetti in the air, fireworks over the bay and a green light blinking across the water. The Roaring Twenties, turned all the way up.',
+    photos:[["img/gatsby-1.jpg", "Everything that glitters", "https://live.staticflickr.com/5680/20899638763_66f0657b3d_b.jpg"], ["img/gatsby-2.jpg", "Fireworks over the bay", "https://live.staticflickr.com/390/19703835476_cbb140305a_b.jpg"], ["img/gatsby-3.jpg", "Sequins", "https://live.staticflickr.com/65535/49220730292_39563dfeb0_b.jpg"], ["img/gatsby-4.jpg", "Feathers", "https://live.staticflickr.com/65535/51487246027_239be2813b_b.jpg"], ["img/gatsby-5.jpg", "Gold-lit nights", "https://cdn.stocksnap.io/img-thumbs/960w/K4JJ1EOGGO.jpg"], ["img/gatsby-6.jpg", "Lanterns on the lawn", "https://pd.w.org/2025/11/408690c327ded13a3.04380240-2048x1536.jpeg"]],
+    palette:[['#000000','Onyx'],['#e6c46f','Champagne gold'],['#b8902f','Antique gold'],['#fff1c4','Pearl'],['#45f08f','The green light']],
+    dress:'Tuxedos and bow ties; sequinned or fringed flapper dresses, headbands, pearls and gold everything.',
+    modest:'A gold-sequinned long dress, or a black kurung with Art Deco gold jewellery.',
+    story:"The invitation came on gold card, with no name at the bottom. You followed the music across the bay, past the lanterns on the lawn, up to a mansion so bright it lights the whole coast. Inside, everything shines: sequins, pearls, gold on every wall. Confetti hangs in the air like it forgot to fall. A brass band plays faster than seems possible, and the whole floor answers with a Charleston. Nobody can tell you who the host is, but everyone has a theory. Across the water, a single green light blinks at the end of a dock, patient and unexplained. This is the kind of night people will still be talking about years from now. Better make it count.",
+    sound:'Roaring Twenties big band, Charleston and swing, with today’s hits reworked as 1920s jazz.',
+    stats:[4,1,4,5,2] }
+];
+const ICONS = {
+  noir:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="6.5" r="1.6"/><circle cx="12" cy="17.5" r="1.6"/><circle cx="6.5" cy="12" r="1.6"/><circle cx="17.5" cy="12" r="1.6"/></svg>',
+  speakeasy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="1"/><circle cx="12" cy="10" r="2.2"/><path d="M12 12v4"/></svg>',
+  gotham:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V12h4v10M9 22V6l3-4 3 4v16M17 22V10h4v12M2 22h20"/></svg>',
+  titanic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><path d="M12 6v15M7 10h10M4 14a8 8 0 0 0 16 0"/></svg>',
+  gatsby:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20a10 10 0 0 1 20 0M6 20a6 6 0 0 1 12 0M12 20V6M12 20 5 9M12 20l7-11M12 2l2 3-2 3-2-3z"/></svg>'
+};
+
+/* ============================ HELPERS ============================ */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const qs = new URLSearchParams(location.search);
+const LIVE = !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY) && qs.get('demo') !== '1';
+const SIM = qs.has('now');                       // ?now=2026-11-28T21:00:00%2B08:00 to preview a phase
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const desktop = matchMedia('(min-width:900px)');
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  sget(k){ try { return sessionStorage.getItem(k); } catch { return null; } },
+  sset(k,v){ try { sessionStorage.setItem(k,v); } catch {} }
+};
+const pad = n => String(n).padStart(2,'0');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tname = t => t.name + (t.sub ? ': ' + t.sub : '');
+const myt = ms => new Intl.DateTimeFormat('en-MY',{timeZone:'Asia/Kuala_Lumpur',day:'numeric',month:'short',hour:'numeric',minute:'2-digit',hour12:true}).format(ms);
+
+let opensAt  = Date.parse(CONFIG.VOTING_OPENS);
+let closesAt = Date.parse(CONFIG.VOTING_CLOSES);
+const dinnerAt = Date.parse(CONFIG.DINNER_AT);
+let offset = 0;
+if (SIM) { const t = Date.parse(qs.get('now')); if (!isNaN(t)) offset = t - Date.now(); }
+const now = () => Date.now() + offset;
+const phaseAt = t => t < opensAt ? 'showcase' : (t <= closesAt ? 'voting' : 'closed');
+
+/* ============================ BACKEND ============================ */
+async function rpc(fn, body){
+  const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 12000);
+  const headers = { 'Content-Type':'application/json', apikey: CONFIG.SUPABASE_ANON_KEY };
+  if (CONFIG.SUPABASE_ANON_KEY.startsWith('eyJ')) headers.Authorization = 'Bearer ' + CONFIG.SUPABASE_ANON_KEY;
+  try {
+    const r = await fetch(CONFIG.SUPABASE_URL.replace(/\/$/,'') + '/rest/v1/rpc/' + fn, { method:'POST', headers, body: JSON.stringify(body || {}), signal: ctl.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.json();
+  } finally { clearTimeout(to); }
+}
+async function syncWindow(){
+  if (!LIVE) return;
+  try {
+    const t0 = Date.now(); const w = await rpc('get_vote_window'); const rtt = Date.now() - t0;
+    if (w && w.opens_at) {
+      opensAt = Date.parse(w.opens_at); closesAt = Date.parse(w.closes_at);
+      if (!SIM) offset = Date.parse(w.server_now) + rtt/2 - Date.now();
+      tick(true);
+    }
+  } catch (e) { /* fall back to CONFIG + device clock (still timezone-safe) */ }
+}
+const normMatric = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g,'');
+async function castVote(matric, theme, name, cls){
+  if (LIVE) return rpc('cast_vote', { p_matric: matric, p_theme: theme, p_name: name, p_class: cls || null });
+  await new Promise(r => setTimeout(r, 700));             // demo backend: same rules, this browser only
+  const p = phaseAt(now());
+  if (p === 'showcase') return { ok:false, error:'not_open' };
+  if (p === 'closed')   return { ok:false, error:'closed' };
+  const m = normMatric(matric); const db = store.get('mi_demo_votes') || {};
+  if (db[m]) return { ok:false, error:'already_voted' };
+  db[m] = { theme, name, cls, at: new Date().toISOString() }; store.set('mi_demo_votes', db);
+  return { ok:true };
+}
+const ERR = {
+  not_open: "Voting hasn't opened yet. Hold tight!",
+  closed: "Voting has closed, so this vote wasn't recorded.",
+  not_eligible: "That matric number isn't on the ASPer22 batch list. Check it for typos, or contact HiCom if you think it's a mistake.",
+  already_voted: "This matric number has already voted. Each student gets one vote, and it can't be changed.",
+  bad_name: "Please enter your name.",
+  network: "Couldn't reach the server. Check your connection and try again. Your vote was not recorded."
+};
+
+/* ============================ STATE ============================ */
+let view = 'hub', cur = 0, preview = null, phase = null, lastSr = '', busy = false;
+
+function setLook(key){                       // swaps background world, effects and sound
+  document.body.dataset.theme = key;
+  $$('.scene').forEach(s => s.classList.toggle('on', s.dataset.s === key));
+  FX.setTheme(key); Sound.setTheme(key);
+}
+function wipe(text, fn){
+  if (reduce.matches) { fn(); return; }
+  busy = true; const w = $('#wipe'); $('#wipe-t').textContent = text;
+  w.classList.remove('run'); void w.offsetWidth; w.classList.add('run');
+  setTimeout(fn, 250); setTimeout(() => { busy = false; }, 560);
+}
+
+/* ============================ HUB ============================ */
+function buildHub(){
+  const voted = store.get('mi_voted');
+  $('#panels').innerHTML = THEMES.map((t,i) => `
+    <a class="panel p-${t.key}" href="#world-${t.id}" data-i="${i}" aria-label="World ${t.id}: ${esc(tname(t))}. ${esc(t.tag)} Enter world.">
+      <span class="art" aria-hidden="true"></span><span class="shade" aria-hidden="true"></span>
+      ${voted && voted.theme === t.id ? '<span class="badge" aria-hidden="true">✓ VOTED HERE</span>' : ''}
+      <span class="inner" aria-hidden="true">
+        <span class="no">${pad(t.id)}</span>
+        <span class="nm">${esc(t.name)}${t.sub ? `<small>${esc(t.sub)}</small>` : ''}</span>
+        <span class="more">
+          <span class="tg" style="display:block">${esc(t.tag)}</span>
+          <span class="chips">${t.moods.slice(0,3).map(m => `<span class="chip">${m}</span>`).join('')}</span>
+          <span class="go"><span class="mouse">ENTER WORLD ▶</span><span class="touch">TAP AGAIN TO ENTER ▶</span></span>
+        </span>
+      </span>
+    </a>`).join('');
+  const box = $('#panels'); let leaveT, hoverT, downOn = false;
+  box.addEventListener('pointerover', e => {
+    if (e.pointerType !== 'mouse') return; const p = e.target.closest('.panel'); if (!p) return;
+    clearTimeout(leaveT); clearTimeout(hoverT); hoverT = setTimeout(() => setPreview(+p.dataset.i), 70);
+  });
+  box.addEventListener('pointerleave', e => {
+    if (e.pointerType !== 'mouse') return; clearTimeout(hoverT); leaveT = setTimeout(() => setPreview(null), 350);
+  });
+  box.addEventListener('pointerdown', e => { const p = e.target.closest('.panel'); downOn = !!(p && p.classList.contains('on')); box.dataset.pt = e.pointerType; });
+  box.addEventListener('click', e => {
+    const p = e.target.closest('.panel'); if (!p) return;
+    const touch = box.dataset.pt && box.dataset.pt !== 'mouse'; box.dataset.pt = '';
+    e.preventDefault();
+    if (touch && !downOn) { setPreview(+p.dataset.i); p.scrollIntoView({block:'nearest', behavior: reduce.matches ? 'auto' : 'smooth'}); return; }
+    navTo(+p.dataset.i);
+  });
+  box.addEventListener('focusin', e => { const p = e.target.closest('.panel'); if (p && !box.dataset.pt) setPreview(+p.dataset.i); });
+  box.addEventListener('keydown', e => {
+    const p = e.target.closest('.panel'); if (!p) return; const i = +p.dataset.i;
+    const k = { ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1 }[e.key]; if (!k) return;
+    e.preventDefault(); $$('.panel')[(i + k + 5) % 5].focus();
+  });
+}
+function setPreview(i){
+  if (view !== 'hub') return;
+  preview = i;
+  $$('.panel').forEach((p,k) => p.classList.toggle('on', k === i));
+  $('#panels').classList.toggle('has-on', i !== null);
+  setLook(i === null ? 'hub' : THEMES[i].key);
+}
+function hubStatus(){
+  const s = $('#hub-status'); if (!s) return;
+  s.innerHTML = phase === 'showcase' ? `Preview all five worlds now. Voting unlocks <b>${myt(opensAt)}</b> and closes <b>${myt(closesAt)}</b> (MYT).`
+    : phase === 'voting' ? `<b>Voting is OPEN.</b> Enter a world to see everything about it and cast your vote. One vote per matric number.`
+    : `<b>Voting has closed.</b> Thank you! HiCom will announce the winning world soon.`;
+}
+
+/* ============================ WORLD DETAIL ============================ */
+function buildTiles(){
+  $('#tiles').innerHTML = THEMES.map((t,i) =>
+    `<a class="tile" href="#world-${t.id}" data-i="${i}" aria-label="World ${t.id}: ${esc(tname(t))}"><span>${t.id}</span>${ICONS[t.key]}</a>`).join('');
+  $('#tiles').addEventListener('click', e => { const b = e.target.closest('.tile'); if (!b) return; e.preventDefault(); navTo(+b.dataset.i, true); });
+}
+function render(dir){
+  const t = THEMES[cur];
+  setLook(t.key);
+  $('#world-no').textContent = `WORLD ${pad(t.id)} / ${pad(THEMES.length)}`;
+  $('#t-name .n-main').textContent = t.name;
+  $('#t-name .n-sub').textContent = t.sub;
+  $('#t-tag').textContent = t.tag;
+  $('#t-moods').innerHTML = t.moods.map(m => `<span class="chip">${m}</span>`).join('');
+  $('#t-tk').textContent = t.tk;
+  $('#t-world').textContent = t.world;
+  $('#t-board').innerHTML = t.photos.map(([src,cap,remote]) => `<figure class="mb"><img src="${src}" data-r="${esc(remote)}" alt="${esc(cap)}" loading="lazy" decoding="async" onerror="if(this.dataset.r){this.src=this.dataset.r;this.dataset.r=''}else{this.remove()}"><figcaption>${esc(cap)}</figcaption></figure>`).join('');
+  $('#t-palette').innerHTML = t.palette.map(([c,n]) => `<div class="sw"><i style="background:${c}"></i><span>${esc(n)}</span></div>`).join('');
+  $('#t-dress').textContent = t.dress;
+  $('#t-modest').innerHTML = '<b>Modest take:</b> '; $('#t-modest').append(t.modest);
+  $('#t-story').textContent = t.story;
+  $('#t-sound').textContent = t.sound;
+  $('#t-stats').innerHTML = STAT_NAMES.map((n,i) =>
+    `<dt>${n}</dt><dd role="img" aria-label="${n}: ${t.stats[i]} out of 5">${[1,2,3,4,5].map(k => `<span class="pip${k<=t.stats[i]?' on':''}"></span>`).join('')}</dd>`).join('');
+  $$('.tile').forEach((b,i) => b.setAttribute('aria-current', i === cur ? 'true' : 'false'));
+  const d = $('#detail'); d.classList.remove('enter-l','enter-r','enter-u');
+  if (!reduce.matches) { void d.offsetWidth; d.classList.add(dir > 0 ? 'enter-r' : dir < 0 ? 'enter-l' : 'enter-u'); }
+  $('#live').textContent = `World ${t.id} of 5: ${tname(t)}`;
+  updateVote();
+  const pw = $('#password'); pw.classList.remove('show');
+  if (t.key === 'speakeasy' && !reduce.matches) { void pw.offsetWidth; pw.classList.add('show'); }
+}
+
+/* ============================ ROUTING ============================ */
+// Navigation is done in JavaScript (not by following links), so it also works inside
+// sandboxed previews. The address bar is updated when the browser allows it.
+function navTo(i, replace){
+  if (busy) return;
+  const h = i == null ? '#worlds' : '#world-' + (i + 1);
+  try { history[replace ? 'replaceState' : 'pushState'](null, '', h); } catch {}
+  show(i, false);
+}
+function route(initial){
+  let m = null; try { m = location.hash.match(/^#world-([1-5])$/); } catch {}
+  show(m ? +m[1] - 1 : null, initial);
+}
+function show(i, initial){
+  if (i != null) {
+    if (view === 'world') {
+      if (i === cur) return;
+      const dir = i > cur ? 1 : -1;
+      wipe(`LOADING WORLD ${pad(i+1)}…`, () => { cur = i; render(dir); scrollTo(0,0); });
+    } else {
+      const go = () => { view = 'world'; document.body.dataset.view = 'world'; cur = i; preview = null; render(0); scrollTo(0,0); if (!initial) $('#t-name').focus({preventScroll:true}); };
+      initial ? go() : wipe(`ENTERING WORLD ${pad(i+1)}…`, go);
+    }
+  } else if (view !== 'hub' || initial) {
+    const from = cur, wasWorld = view === 'world';
+    const go = () => {
+      view = 'hub'; document.body.dataset.view = 'hub'; $('#password').classList.remove('show');
+      setPreview(null); scrollTo(0,0);
+      if (wasWorld) $$('.panel')[from].focus({preventScroll:true});
+    };
+    initial ? go() : wipe('WORLD SELECT', go);
+  }
+}
+addEventListener('popstate', () => route(false));
+$$('.back,#all').forEach(a => a.addEventListener('click', e => { e.preventDefault(); navTo(null); }));
+
+/* ============================ CLOCK ============================ */
+function splitMs(ms){ ms = Math.max(0, ms); const s = Math.floor(ms/1000); return { d:Math.floor(s/86400), h:Math.floor(s%86400/3600), m:Math.floor(s%3600/60), s:s%60 }; }
+const fmt = c => `${pad(c.d)}:${pad(c.h)}:${pad(c.m)}:${pad(c.s)}`;
+function tick(force){
+  const t = now(); const p = phaseAt(t);
+  if (p !== phase) {
+    const prev = phase; phase = p; document.body.dataset.phase = p;
+    if (prev === 'showcase' && p === 'voting') showUnlock();
+    updateVote(); hubStatus(); force = true;
+  }
+  const target = p === 'showcase' ? opensAt : p === 'voting' ? closesAt : dinnerAt;
+  const c = splitMs(target - t);
+  $('#cd-d').textContent = pad(c.d); $('#cd-h').textContent = pad(c.h); $('#cd-m').textContent = pad(c.m); $('#cd-s').textContent = pad(c.s);
+  const L = { showcase:['VOTING OPENS IN','Undian dibuka dalam'], voting:['VOTING CLOSES IN','Undian ditutup dalam'], closed:['VOTING CLOSED · DINNER NIGHT IN','Undian ditutup · Malam Inspirasi dalam'] }[p];
+  if (force || $('#clock-label').dataset.p !== p) { $('#clock-label').innerHTML = `${L[0]}<small>${L[1]}</small>`; $('#clock-label').dataset.p = p; }
+  const lk = $('#vote-btn .cd'); if (lk) lk.textContent = fmt(c);
+  const sr = `${L[0].toLowerCase()} ${c.d} days, ${c.h} hours, ${c.m} minutes.`;
+  if (sr !== lastSr) { lastSr = sr; $('#clock-sr').textContent = sr.charAt(0).toUpperCase() + sr.slice(1); }
+}
+function startClock(){ tick(true); const loop = () => { tick(); setTimeout(loop, 1000 - (now() % 1000) + 5); }; loop(); }
+
+/* ============================ VOTE BUTTON ============================ */
+function updateVote(){
+  const b = $('#vote-btn'), note = $('#vote-note'), t = THEMES[cur], mine = store.get('mi_voted');
+  if (phase === 'showcase') {
+    b.setAttribute('aria-disabled','true');
+    b.innerHTML = `<span class="lockt">🔒 LOCKED</span> · OPENS IN <span class="cd">--:--:--:--</span><small>VOTE FOR THIS WORLD</small>`;
+    note.textContent = `Voting runs ${myt(opensAt)} to ${myt(closesAt)} (Malaysia time).`;
+  } else if (phase === 'voting') {
+    b.removeAttribute('aria-disabled');
+    b.innerHTML = `▶ VOTE FOR THIS WORLD<small>UNDI SEKARANG</small>`;
+    note.textContent = mine ? `This device already cast a vote for World ${pad(mine.theme)}. Another student can still vote here with their own matric number.` : 'One vote per matric number. Final once submitted.';
+  } else {
+    b.setAttribute('aria-disabled','true');
+    b.innerHTML = `VOTING CLOSED<small>UNDIAN DITUTUP</small>`;
+    note.textContent = 'Thanks for voting! HiCom will announce the winning world soon.';
+  }
+  b.setAttribute('aria-label', phase === 'voting' ? `Vote for World ${t.id}: ${t.name}` : b.textContent.replace(/\s+/g,' ').trim());
+  tick();
+}
+
+/* ============================ DIALOG ============================ */
+let lastFocus = null, draft = { matric:'', name:'', cls:'' }, submitting = false;
+const dlg = () => $('#dlg');
+function openModal(){
+  if (phase !== 'voting') { $('#vote-note').animate?.([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'none'}],{duration:240}); return; }
+  lastFocus = document.activeElement; $('#modal').hidden = false; stepForm(); document.body.style.overflow = 'hidden';
+}
+function closeModal(){ if (submitting) return; $('#modal').hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+function stepForm(err){
+  const t = THEMES[cur];
+  dlg().innerHTML = `
+    <h2 id="dlg-title">ENTER PLAYER DETAILS</h2>
+    <p class="for">Voting for <b>World ${pad(t.id)}: ${esc(tname(t))}</b></p>
+    <form id="f" novalidate>
+      <label for="f-m">MATRIC NUMBER <small>/ No. matrik</small></label>
+      <input id="f-m" name="matric" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" required value="${esc(draft.matric)}">
+      <label for="f-n">FULL NAME <small>/ Nama penuh</small></label>
+      <input id="f-n" name="name" autocomplete="name" required maxlength="100" value="${esc(draft.name)}">
+      <label for="f-c">CLASS <small>/ Kelas (optional)</small></label>
+      <input id="f-c" name="cls" maxlength="40" value="${esc(draft.cls)}">
+      <p class="err" id="f-err" role="alert">${err ? esc(err) : ''}</p>
+      <div class="row"><button type="button" class="btn" id="f-x">CANCEL</button><button type="submit" class="btn primary">CONTINUE ▶</button></div>
+    </form>`;
+  $('#f-x').onclick = closeModal;
+  $('#f').onsubmit = e => {
+    e.preventDefault();
+    draft = { matric: $('#f-m').value.trim(), name: $('#f-n').value.trim(), cls: $('#f-c').value.trim() };
+    const m = normMatric(draft.matric);
+    if (m.length < 4 || m.length > 15) return showErr('Please enter a valid matric number.', '#f-m');
+    if (draft.name.length < 2) return showErr(ERR.bad_name, '#f-n');
+    stepConfirm();
+  };
+  $('#f-m').focus();
+}
+function showErr(msg, field){ $('#f-err').textContent = msg; $(field).focus(); }
+function stepConfirm(){
+  const t = THEMES[cur];
+  dlg().innerHTML = `
+    <h2 id="dlg-title">ARE YOU SURE?</h2>
+    <div class="sum">World <b>${pad(t.id)}: ${esc(tname(t))}</b><br>Matric: <b>${esc(normMatric(draft.matric))}</b><br>Name: <b>${esc(draft.name)}</b>${draft.cls ? `<br>Class: <b>${esc(draft.cls)}</b>` : ''}</div>
+    <div class="warn"><b>THIS IS FINAL</b>Once you lock it in, your vote can't be changed. Undian adalah muktamad.</div>
+    <div class="row"><button type="button" class="btn" id="c-back">◀ GO BACK</button><button type="button" class="btn primary" id="c-go">LOCK IT IN</button></div>`;
+  $('#c-back').onclick = () => stepForm(); $('#c-go').onclick = submit; $('#c-go').focus();
+}
+async function submit(){
+  if (submitting) return; submitting = true;
+  const go = $('#c-go'), back = $('#c-back'); go.disabled = back.disabled = true; go.textContent = 'SAVING…';
+  let res;
+  try { res = await castVote(normMatric(draft.matric), THEMES[cur].id, draft.name, draft.cls); }
+  catch { res = { ok:false, error:'network' }; }
+  submitting = false;
+  if (res && res.ok) { store.set('mi_voted', { theme: THEMES[cur].id, at: Date.now() }); stepDone(); draft = { matric:'', name:'', cls:'' }; updateVote(); buildHub(); }
+  else { const code = res && res.error; stepForm(ERR[code] || ERR.network); if (code === 'closed' || code === 'not_open') syncWindow(); }
+}
+function stepDone(){
+  const t = THEMES[cur];
+  dlg().innerHTML = `
+    <div class="ach">
+      <svg class="trophy" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M18 6h28v14a14 14 0 0 1-28 0zM10 10h8v6a6 6 0 0 1-6-6zm36 0h8a6 6 0 0 1-6 6v-6zM29 34h6v10h-6zM20 46h24v6H20zM16 54h32v6H16z"/></svg>
+      <span class="badge">ACHIEVEMENT UNLOCKED</span>
+      <h2 id="dlg-title">VOICE OF THE BATCH</h2>
+      <p>+1 vote for <b>World ${pad(t.id)}: ${esc(tname(t))}</b>.<br>Your vote is in, and it's final. HiCom will announce the winning world after voting closes.</p>
+      <div class="row"><button type="button" class="btn" id="d-share">SHARE LINK</button><button type="button" class="btn primary" id="d-ok">BACK TO WORLD</button></div>
+    </div>`;
+  $('#d-ok').onclick = closeModal; $('#d-ok').focus();
+  $('#d-share').onclick = async () => {
+    const data = { title:'Malam Inspirasi ASPutra 2027', text:'Pick the theme for our batch dinner! One vote each. Undi sekarang 👇', url: CONFIG.SITE_URL };
+    try { if (navigator.share) { await navigator.share(data); return; } } catch { return; }
+    try { await navigator.clipboard.writeText(data.text + ' ' + data.url); $('#d-share').textContent = 'COPIED ✓'; } catch {}
+  };
+  if (!reduce.matches) FX.burst();
+}
+$('#modal').addEventListener('keydown', e => {
+  if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeModal(); return; }
+  if (e.key !== 'Tab') return;
+  const f = [...dlg().querySelectorAll('button:not([disabled]),input')]; if (!f.length) return;
+  const a = f[0], z = f[f.length-1];
+  if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+  else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+});
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+
+/* ============================ SPLASH / UNLOCK ============================ */
+function showUnlock(){
+  if (!$('#splash').classList.contains('gone')) return;
+  store.sset('mi_unlock_seen','1');
+  const u = $('#unlock'); u.hidden = false; u.focus();
+  if (!reduce.matches) FX.burst();
+  const hide = () => { u.hidden = true; (view === 'world' ? $('#vote-btn') : $('#hub-title')).focus(); };
+  u.onclick = hide; clearTimeout(showUnlock.t); showUnlock.t = setTimeout(() => { if (!u.hidden) hide(); }, 4200);
+}
+function enter(){
+  const s = $('#splash'); if (s.classList.contains('gone')) return;
+  s.classList.add('gone'); s.setAttribute('aria-hidden','true'); s.tabIndex = -1;
+  if (!Sound.on && !store.get('mi_muted')) { Sound.toggle(); soundUI(); }   // sound on by default (needs this tap to start)
+  setTimeout(() => { s.hidden = true; }, 600);
+  if (phase === 'voting' && !store.sget('mi_unlock_seen')) setTimeout(showUnlock, 300);
+  else (view === 'world' ? $('#t-name') : $('#hub-title')).focus({preventScroll:true});
+}
+$('#splash').addEventListener('click', enter);
+
+/* ============================ INPUT ============================ */
+$('#vote-btn').onclick = openModal;
+const step = d => navTo(((cur + d) + 5) % 5, true);
+document.addEventListener('keydown', e => {
+  if (!$('#splash').classList.contains('gone')) { if (['Enter',' ','Escape'].includes(e.key)) { e.preventDefault(); enter(); } return; }
+  if (!$('#modal').hidden || /INPUT|TEXTAREA/.test(document.activeElement.tagName) || view !== 'world' || busy) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  else if (e.key === 'Escape') { e.preventDefault(); navTo(null); }
+});
+let tx = null, ty = 0;
+document.addEventListener('touchstart', e => { if (!$('#modal').hidden || view !== 'world') return; tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive:true });
+document.addEventListener('touchend', e => {
+  if (tx === null) return; const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+  if (!busy && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) step(dx < 0 ? 1 : -1);
+}, { passive:true });
+
+/* ============================ FX (canvas particles) ============================ */
+const FX = (() => {
+  const cv = $('#fx'), g = cv.getContext('2d');
+  let W = 0, H = 0, key = 'hub', P = [], B = [], raf = 0, last = 0, acc = 0, flash = 0, nextFw = 0, grain = [];
+  const rnd = (a,b) => a + Math.random() * (b - a);
+  const small = () => W < 700;
+  function mkGrain(){
+    grain = [0,1,2].map(() => {
+      const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'); const d = x.createImageData(128,128);
+      for (let i = 0; i < d.data.length; i += 4) { const v = Math.random()*255; d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3] = Math.random()*38; }
+      x.putImageData(d,0,0); return g.createPattern(c,'repeat');
+    });
+  }
+  const smoke = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+    const r = x.createRadialGradient(64,64,0,64,64,64); r.addColorStop(0,'rgba(255,225,190,.5)'); r.addColorStop(1,'rgba(255,225,190,0)'); x.fillStyle = r; x.fillRect(0,0,128,128); return c; })();
+  const GOLD = ['#e6c46f','#f3d98e','#c9a24a','#fff1c4','#b8902f'];
+  const init = {
+    hub(){ P = Array.from({length: small()?50:90}, () => ({x:rnd(0,W), y:rnd(0,H*.6), r:rnd(.5,1.6), ph:rnd(0,6.28), s:rnd(.6,2)})); },
+    noir(){ P = Array.from({length:24}, () => ({x:rnd(0,W), y:rnd(0,H)})); },
+    speakeasy(){ P = Array.from({length: small()?12:20}, () => ({x:rnd(0,W), y:rnd(0,H), r:rnd(80,220), vx:rnd(4,14), vy:rnd(-14,-5), a:rnd(.05,.13)}))
+      .concat(Array.from({length:14}, () => ({spark:1, x:rnd(0,W), y:rnd(H*.4,H), vy:rnd(-22,-8), a:rnd(.3,.8)}))); },
+    gotham(){ P = Array.from({length: small()?80:150}, () => ({x:rnd(-100,W), y:rnd(-H,H), l:rnd(10,24), v:rnd(500,820)})); },
+    titanic(){ P = Array.from({length: small()?28:46}, () => ({x:rnd(0,W), y:rnd(0,H*.75), r:rnd(.6,2), ph:rnd(0,6.28), vy:rnd(-6,-2)})); },
+    gatsby(){ P = Array.from({length: small()?40:70}, () => conf(true)); nextFw = 1.2; }
+  };
+  function conf(any){ return { x:rnd(0,W), y: any ? rnd(-H,H) : rnd(-60,-10), w:rnd(4,7), h:rnd(8,13), v:rnd(35,75), sw:rnd(0,6.28), sp:rnd(1,3), rot:rnd(0,6.28), c:GOLD[(Math.random()*GOLD.length)|0] }; }
+  function firework(x,y){ const n = small()?28:44; const c = GOLD[(Math.random()*3)|0];
+    for (let i = 0; i < n; i++){ const a = i/n*6.283, s = rnd(70,170); B.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1.4,c}); } }
+  const step = {
+    hub(dt, t){ g.clearRect(0,0,W,H);
+      P.forEach(p => { const a = .25 + .5*Math.abs(Math.sin(t*p.s + p.ph)); g.fillStyle = `rgba(255,240,200,${a})`; g.fillRect(p.x, p.y, p.r*2, p.r*2); }); },
+    noir(dt){
+      acc += dt; if (acc > .08 || dt === 0) { acc = 0; g.clearRect(0,0,W,H);
+        const p = grain[(Math.random()*3)|0]; g.save(); const ox = rnd(0,128), oy = rnd(0,128); g.translate(-ox,-oy); g.fillStyle = p; g.fillRect(0,0,W+128,H+128); g.restore();
+        g.fillStyle = 'rgba(255,255,255,.55)'; P.forEach(d => { if (Math.random() < .3) { d.x = rnd(0,W); d.y = rnd(0,H); } g.fillRect(d.x, d.y, rnd(1,2.4), rnd(1,2.4)); });
+        if (Math.random() < .18) { g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(rnd(0,W), 0, 1, H); }
+      }
+    },
+    speakeasy(dt){ g.clearRect(0,0,W,H);
+      P.forEach(p => {
+        if (p.spark) { p.y += p.vy*dt; p.x += Math.sin(p.y/30)*.3; if (p.y < H*.2) { p.y = H; p.x = rnd(0,W); } g.fillStyle = `rgba(255,190,90,${p.a})`; g.fillRect(p.x,p.y,2,2); return; }
+        p.x += p.vx*dt; p.y += p.vy*dt; if (p.y < -p.r) { p.y = H + p.r; p.x = rnd(-100,W); } if (p.x > W + p.r) p.x = -p.r;
+        g.globalAlpha = p.a; g.drawImage(smoke, p.x - p.r, p.y - p.r, p.r*2, p.r*2); g.globalAlpha = 1;
+      }); },
+    gotham(dt){ g.clearRect(0,0,W,H);
+      g.strokeStyle = 'rgba(175,195,255,.38)'; g.lineWidth = 1; g.beginPath();
+      P.forEach(d => { d.y += d.v*dt; d.x += d.v*dt*.18; if (d.y > H) { d.y = rnd(-80,-10); d.x = rnd(-100,W); } g.moveTo(d.x,d.y); g.lineTo(d.x + d.l*.18, d.y + d.l); });
+      g.stroke();
+      if (flash > 0) { g.fillStyle = `rgba(200,215,255,${flash*.12})`; g.fillRect(0,0,W,H); flash -= dt*2.2; }
+      else if (dt && Math.random() < dt/14) flash = 1; },
+    titanic(dt, t){ g.clearRect(0,0,W,H);
+      P.forEach(p => { p.y += p.vy*dt; p.x += Math.sin(t*.6 + p.ph)*.15; if (p.y < 0) { p.y = H*.75; p.x = rnd(0,W); }
+        const a = .35 + .35*Math.sin(t*2 + p.ph); g.fillStyle = `rgba(255,222,160,${a})`; g.beginPath(); g.arc(p.x,p.y,p.r,0,6.283); g.fill(); }); },
+    gatsby(dt){ g.clearRect(0,0,W,H);
+      P.forEach(p => { p.y += p.v*dt; p.sw += p.sp*dt; p.x += Math.sin(p.sw)*.6; if (p.y > H + 20) Object.assign(p, conf(false));
+        g.save(); g.translate(p.x,p.y); g.rotate(p.rot + p.sw*.5); g.scale(1, Math.cos(p.sw*1.6)); g.fillStyle = p.c; g.fillRect(-p.w/2,-p.h/2,p.w,p.h); g.restore(); });
+      if (dt) { nextFw -= dt; if (nextFw <= 0) { firework(rnd(W*.15,W*.85), rnd(H*.12,H*.4)); nextFw = rnd(2.2,3.8); } } }
+  };
+  function drawBursts(dt){
+    if (!B.length) return; B = B.filter(b => (b.life -= dt) > 0);
+    B.forEach(b => { b.vy += 90*dt; b.vx *= .985; b.x += b.vx*dt; b.y += b.vy*dt; g.globalAlpha = Math.min(1,b.life); g.fillStyle = b.c; g.fillRect(b.x,b.y,2.4,2.4); });
+    g.globalAlpha = 1;
+  }
+  function frame(ts){ raf = requestAnimationFrame(frame); const dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts; step[key](dt, ts/1000); drawBursts(dt); }
+  function run(){ cancelAnimationFrame(raf); raf = 0; last = 0;
+    if (reduce.matches || document.hidden) { g.clearRect(0,0,W,H); if (key !== 'gotham') step[key](0, 0); return; }
+    raf = requestAnimationFrame(frame); }
+  function resize(){ const dpr = Math.min(window.devicePixelRatio || 1, 1.5); W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr); g.setTransform(dpr,0,0,dpr,0,0); if (!grain.length) mkGrain(); init[key](); run(); }
+  let rT; addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(resize, 150); });
+  document.addEventListener('visibilitychange', run);
+  reduce.addEventListener?.('change', run);
+  return {
+    start(k){ key = k; resize(); },
+    setTheme(k){ if (k === key && P.length) return; key = k; B = []; flash = 0; if (W) { init[k](); run(); } },
+    burst(){ for (let i = 0; i < 3; i++) setTimeout(() => firework(rnd(W*.2,W*.8), rnd(H*.15,H*.45)), i*280); if (!raf) run(); }
+  };
+})();
+
+/* ============================ SOUND (generated, no files) ============================ */
+const Sound = (() => {
+  let ctx = null, master = null, on = false, key = 'hub', voice = null, white = null, brown = null, swapT;
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+  function buffers(){
+    const len = ctx.sampleRate * 2; white = ctx.createBuffer(1, len, ctx.sampleRate); brown = ctx.createBuffer(1, len, ctx.sampleRate);
+    const w = white.getChannelData(0), b = brown.getChannelData(0); let l = 0;
+    for (let i = 0; i < len; i++) { const r = Math.random()*2-1; w[i] = r; l = (l + .02*r) / 1.02; b[i] = l * 3.5; }
+  }
+  function V(){
+    const out = ctx.createGain(); out.gain.value = 0; out.connect(master); out.gain.linearRampToValueAtTime(1, ctx.currentTime + 1);
+    return { out, nodes:[], timers:[],
+      src(buf){ const s = ctx.createBufferSource(); s.buffer = buf; s.loop = true; s.start(); this.nodes.push(s); return s; },
+      osc(type, f){ const o = ctx.createOscillator(); o.type = type; o.frequency.value = f; o.start(); this.nodes.push(o); return o; },
+      filt(type, f, q){ const b = ctx.createBiquadFilter(); b.type = type; b.frequency.value = f; if (q) b.Q.value = q; return b; },
+      gain(v){ const x = ctx.createGain(); x.gain.value = v; return x; } };
+  }
+  const chain = (...n) => { for (let i = 0; i < n.length - 1; i++) n[i].connect(n[i+1]); return n[n.length-1]; };
+  function note(v, t, f, dur, vol, type, cutoff){
+    const o = ctx.createOscillator(), e = ctx.createGain(), lp = ctx.createBiquadFilter();
+    o.type = type || 'triangle'; o.frequency.value = f; lp.type = 'lowpass'; lp.frequency.value = cutoff || 900;
+    e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(vol, t + .012); e.gain.exponentialRampToValueAtTime(.0005, t + dur);
+    chain(o, lp, e, v.out); o.start(t); o.stop(t + dur + .05);
+  }
+  function hit(v, t, freq, dur, vol, type){
+    const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), e = ctx.createGain();
+    s.buffer = white; f.type = type || 'bandpass'; f.frequency.value = freq;
+    e.gain.setValueAtTime(vol, t); e.gain.exponentialRampToValueAtTime(.0005, t + dur);
+    chain(s, f, e, v.out); s.start(t, Math.random()); s.stop(t + dur + .05);
+  }
+  function sequencer(v, bpm, beatFn){
+    const spb = 60 / bpm; let nextT = ctx.currentTime + .1, beat = 0;
+    v.timers.push(setInterval(() => { while (nextT < ctx.currentTime + .25) { beatFn(nextT, beat, spb); nextT += spb; beat++; } }, 60));
+  }
+  const build = {
+    hub(v){ // soft arcade menu loop
+      const prog = [[48,[60,64,67,71]],[45,[57,60,64,67]],[41,[57,60,65,69]],[43,[55,59,62,67]]], arp = [0,1,2,3,2,1,2,1];
+      sequencer(v, 104, (t, b, spb) => { const [root, ch] = prog[Math.floor(b/8) % 4];
+        note(v, t, mtof(ch[arp[b%8]] + 12), spb*1.4, .03, 'square', 1800);
+        if (b % 8 === 0) note(v, t, mtof(root), spb*7.5, .07, 'triangle', 400); });
+    },
+    noir(v){ chain(v.osc('sine', 60), v.gain(.05), v.out); chain(v.osc('sine', 120), v.gain(.018), v.out);
+      const flutter = v.gain(0); chain(v.src(white), v.filt('bandpass', 2400, .8), flutter, v.out); chain(v.osc('square', 24), v.gain(.018), flutter.gain);
+      chain(v.src(brown), v.filt('lowpass', 300), v.gain(.05), v.out);
+      const torch = [[57,60,64,67],[50,53,57,60],[52,56,59,62],[57,60,64,67]];
+      sequencer(v, 60, (t, b) => { if (b % 2 === 0) torch[Math.floor(b/2) % 4].forEach((m,k) => note(v, t + k*.06, mtof(m), 2.4, .016, 'sine', 1200)); });
+    },
+    speakeasy(v){ const bass = [50,53,57,60, 43,47,50,53, 48,52,55,59, 45,49,52,55], chords = [[62,65,69,72],[59,62,65,67],[60,64,67,71],[61,64,67,69]];
+      sequencer(v, 126, (t, b, spb) => {
+        note(v, t, mtof(bass[b % 16]), spb*.95, .16, 'triangle', 500); hit(v, t, 7000, .09, .05, 'highpass'); hit(v, t + spb*.66, 7000, .06, .03, 'highpass');
+        if (b % 2 === 1) { hit(v, t, 3500, .22, .06); chords[Math.floor(b/4) % 4].forEach(m => note(v, t + spb*.66, mtof(m), .35, .025, 'triangle', 1800)); }
+      });
+      chain(v.src(white), v.filt('highpass', 5000), v.gain(.006), v.out);
+    },
+    gotham(v){ chain(v.src(white), v.filt('highpass', 900), v.filt('lowpass', 7000), v.gain(.11), v.out); chain(v.src(brown), v.filt('lowpass', 140), v.gain(.12), v.out);
+      sequencer(v, 50, (t, b) => { const ns = [[45,52,57],[41,48,53],[43,50,55],[40,47,52]][Math.floor(b/2) % 4]; if (b % 2 === 0) ns.forEach(m => note(v, t, mtof(m), 2.6, .02, 'sawtooth', 600)); });
+      const thunder = () => { const t = ctx.currentTime, s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), e = ctx.createGain();
+        s.buffer = brown; f.type = 'lowpass'; f.frequency.value = 180; e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(.5, t + .4); e.gain.exponentialRampToValueAtTime(.001, t + 4);
+        chain(s, f, e, v.out); s.start(t); s.stop(t + 4.2); };
+      v.timers.push(setInterval(() => { if (Math.random() < .5) thunder(); }, 14000));
+    },
+    titanic(v){ const swell = v.gain(.12); chain(v.src(brown), v.filt('lowpass', 520), swell, v.out); chain(v.osc('sine', .11), v.gain(.09), swell.gain);
+      chain(v.src(white), v.filt('bandpass', 1200, .5), v.gain(.012), v.out);
+      const waltz = [[50,[62,66,69]],[45,[61,64,69]],[47,[62,66,71]],[43,[62,67,71]]];
+      sequencer(v, 132, (t, b) => { const [r, ch] = waltz[Math.floor(b/3) % 4];
+        if (b % 3 === 0) note(v, t, mtof(r), .9, .08, 'triangle', 500); else ch.forEach(m => note(v, t, mtof(m), .4, .014, 'sine', 2000)); });
+    },
+    gatsby(v){ const prog = [[48,[60,64,67]],[45,[61,64,67]],[50,[62,66,69]],[43,[59,62,65]]];
+      sequencer(v, 200, (t, b, spb) => { const [root, ch] = prog[Math.floor(b/4) % 4], beat = b % 4;
+        if (beat === 0) { note(v, t, mtof(root), .3, .2, 'triangle', 600); note(v, t + spb*1.5, mtof(root + 7), .25, .16, 'triangle', 600); }
+        if (beat === 1 || beat === 3) ch.forEach(m => note(v, t, mtof(m), .16, .03, 'square', 2600));
+        hit(v, t, 8000, .05, beat % 2 ? .04 : .02, 'highpass'); });
+      const murmur = v.gain(.05); chain(v.src(brown), v.filt('bandpass', 520, 1.2), murmur, v.out); chain(v.osc('sine', .3), v.gain(.02), murmur.gain);
+    }
+  };
+  function stopVoice(v){ if (!v) return; v.timers.forEach(clearInterval);
+    const t = ctx.currentTime; v.out.gain.cancelScheduledValues(t); v.out.gain.setValueAtTime(v.out.gain.value, t); v.out.gain.linearRampToValueAtTime(0, t + .35);
+    setTimeout(() => { v.nodes.forEach(n => { try { n.stop(); } catch {} }); try { v.out.disconnect(); } catch {} }, 450); }
+  function play(){ stopVoice(voice); voice = null; if (!on) return; voice = V(); build[key](voice); }
+  document.addEventListener('visibilitychange', () => { if (!ctx) return; document.hidden ? ctx.suspend() : (on && ctx.resume()); });
+  return {
+    get on(){ return on; },
+    toggle(){
+      on = !on;
+      if (on && !ctx) { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) { on = false; return false; }
+        ctx = new AC(); master = ctx.createGain(); master.gain.value = .55; master.connect(ctx.destination); buffers(); }
+      if (on) ctx.resume(); clearTimeout(swapT); play(); return on;
+    },
+    setTheme(k){ if (k === key && (voice || !on)) return; key = k; if (!on) return; clearTimeout(swapT); swapT = setTimeout(play, 180); }
+  };
+})();
+function soundUI(){
+  const on = Sound.on;
+  $('#sound').setAttribute('aria-pressed', on); $('#sound').textContent = on ? '♪ SOUND ON' : '♪ SOUND OFF';
+  $('#hear').setAttribute('aria-pressed', on); $('#hear-t').textContent = on ? 'NOW PLAYING · TAP TO MUTE' : 'HEAR THIS WORLD';
+}
+const flip = () => { const on = Sound.toggle(); store.set('mi_muted', !on); soundUI(); };
+$('#sound').onclick = flip;
+$('#hear').onclick = flip;
+
+/* ============================ BOOT ============================ */
+if (!LIVE) $('#demo').hidden = false;
+buildHub(); buildTiles();
+phase = phaseAt(now()); document.body.dataset.phase = phase; hubStatus();
+FX.start('hub');
+route(true);
+startClock();
+syncWindow();
+setInterval(syncWindow, 5 * 60 * 1000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) syncWindow(); });
+$('#splash').focus();
+})();
+</script>
+</body>
+</html>
