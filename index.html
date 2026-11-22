@@ -391,6 +391,9 @@ body[data-theme=gatsby] .card::after{bottom:-7px;right:-7px;border-left:0;border
 .warn{border:2px dashed #ff5a5a;padding:12px;margin:12px 0 0;line-height:1.45;font-size:.98rem}
 .warn b{font-family:var(--pixel);font-size:9px;color:#ff7a7a;display:block;margin-bottom:6px}
 .sum{margin:12px 0 0;padding:12px;background:#151515;line-height:1.7;font-size:.98rem}
+.dlg .note{line-height:1.5;font-size:.98rem;color:#e6e6e6;margin:0 0 4px}
+.dlg .mono{font-family:ui-monospace,monospace;font-size:.9em}
+.gbtn{background:#fff!important;color:#111!important;border-color:#fff!important}
 .ach{text-align:center}
 .ach .trophy{width:84px;height:84px;margin:6px auto 10px;display:block;color:var(--accent);animation:pop .6s both}
 .ach .badge{display:inline-block;font-family:var(--pixel);font-size:8px;letter-spacing:.12em;background:var(--accent);color:var(--accent-ink);padding:6px 8px;margin-bottom:12px}
@@ -599,7 +602,7 @@ body[data-theme=gatsby] .card::after{bottom:-7px;right:-7px;border-left:0;border
   <span class="sp-pre" style="color:#fff">5 WORLDS · 1 NIGHT · YOU DECIDE</span>
   <span class="sp-start">PRESS START<small>Tekan untuk masuk</small></span>
   <span class="sp-meta" style="opacity:.8">♪ SOUND ON · MUTE ANYTIME (TOP RIGHT)</span>
-  <span class="sp-meta">23.04.2027 · DEWAN BANKUET UPM<br>HICOM ASPer22</span>
+  <span class="sp-meta">23.04.2027 · DEWAN BANKUET UPM<br>HiCom ASPer22</span>
 </button>
 
 <button id="unlock" type="button" hidden aria-label="Voting is now open. Continue.">
@@ -624,9 +627,10 @@ const CONFIG = {
   VOTING_OPENS:  "2026-11-27T20:00:00+08:00",
   VOTING_CLOSES: "2026-12-02T23:59:00+08:00",
   DINNER_AT:     "2027-04-23T20:00:00+08:00",   // countdown target after voting closes
-  SUPABASE_URL:      "https://jkmhnzpquchofxquelzn.supabase.co",                         // e.g. "https://abcdefgh.supabase.co"
-  SUPABASE_ANON_KEY: "sb_publishable_SL3lz8CAtkioi-VVkHS8Og_lIwQuTb-",                         // Settings > API Keys > publishable / anon key
-  SITE_URL: "https://kimbergz.github.io/malam-inspirasi/"
+  SUPABASE_URL:      "https://jkmhnzpquchofxquelzn.supabase.co",
+  SUPABASE_ANON_KEY: "",                         // Settings > API Keys > publishable / anon key
+  SITE_URL: "https://kimbergz.github.io/malam-inspirasi/",
+  UPM_EMAIL_DOMAIN: "student.upm.edu.my"           // students sign in with their UPM Google account
 };
 
 /* ============================ THEMES ============================ */
@@ -729,12 +733,14 @@ const now = () => Date.now() + offset;
 const phaseAt = t => t < opensAt ? 'showcase' : (t <= closesAt ? 'voting' : 'closed');
 
 /* ============================ BACKEND ============================ */
-async function rpc(fn, body){
+async function rpc(fn, body, token){
   const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 12000);
   const headers = { 'Content-Type':'application/json', apikey: CONFIG.SUPABASE_ANON_KEY };
-  if (CONFIG.SUPABASE_ANON_KEY.startsWith('eyJ')) headers.Authorization = 'Bearer ' + CONFIG.SUPABASE_ANON_KEY;
+  if (token) headers.Authorization = 'Bearer ' + token;
+  else if (CONFIG.SUPABASE_ANON_KEY.startsWith('eyJ')) headers.Authorization = 'Bearer ' + CONFIG.SUPABASE_ANON_KEY;
   try {
     const r = await fetch(CONFIG.SUPABASE_URL.replace(/\/$/,'') + '/rest/v1/rpc/' + fn, { method:'POST', headers, body: JSON.stringify(body || {}), signal: ctl.signal });
+    if (r.status === 401 || r.status === 403) return { ok:false, error:'auth_expired' };
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return await r.json();
   } finally { clearTimeout(to); }
@@ -751,23 +757,64 @@ async function syncWindow(){
   } catch (e) { /* fall back to CONFIG + device clock (still timezone-safe) */ }
 }
 const normMatric = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g,'');
-async function castVote(matric, theme, name, cls){
-  if (LIVE) return rpc('cast_vote', { p_matric: matric, p_theme: theme, p_name: name, p_class: cls || null });
-  await new Promise(r => setTimeout(r, 700));             // demo backend: same rules, this browser only
+
+/* ---- Sign in with the student's UPM Google account (via Supabase) ----
+   The vote itself is checked on the server against the signed-in account,
+   so the matric number can't be typed in or faked. */
+const Auth = (() => {
+  const K = 'mi_auth', base = () => CONFIG.SUPABASE_URL.replace(/\/$/,'');
+  const get = () => { try { const t = JSON.parse(sessionStorage.getItem(K)); if (t && t.exp > Date.now() + 20000) return t; } catch {} return null; };
+  const set = t => { try { sessionStorage.setItem(K, JSON.stringify(t)); } catch {} };
+  function clear(){
+    const t = get(); try { sessionStorage.removeItem(K); } catch {}
+    if (t && LIVE && !t.demo) fetch(base() + '/auth/v1/logout', { method:'POST', headers:{ apikey: CONFIG.SUPABASE_ANON_KEY, Authorization:'Bearer ' + t.at } }).catch(() => {});
+  }
+  function email(t){
+    if (!t) return ''; if (t.demo) return t.demo.toLowerCase() + '@' + CONFIG.UPM_EMAIL_DOMAIN;
+    try { return JSON.parse(atob(t.at.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).email || ''; } catch { return ''; }
+  }
+  function signIn(){
+    try { sessionStorage.setItem('mi_return', String(cur)); } catch {}
+    location.href = base() + '/auth/v1/authorize?' + new URLSearchParams({
+      provider:'google', redirect_to: location.origin + location.pathname, prompt:'select_account', hd: CONFIG.UPM_EMAIL_DOMAIN });
+  }
+  function handleReturn(){                    // called once on load, after Google sends the student back
+    let h, q;
+    try { h = location.hash.slice(1); q = new URLSearchParams(location.search); } catch { return null; }
+    const hp = new URLSearchParams(h);
+    const err = hp.get('error_description') || hp.get('error') || q.get('error_description') || q.get('error');
+    if (!hp.get('access_token') && !err) return null;
+    let world = 0; try { world = +sessionStorage.getItem('mi_return') || 0; } catch {}
+    try { history.replaceState(null, '', location.pathname + '#world-' + (world + 1)); } catch {}
+    if (hp.get('access_token')) { set({ at: hp.get('access_token'), exp: Date.now() + (+hp.get('expires_in') || 3600) * 1000 }); return { ok:true, world }; }
+    return { ok:false, world, error: err };
+  }
+  return { get, set, clear, email, signIn, handleReturn };
+})();
+
+async function voteStatus(){
+  const t = Auth.get(); if (!t) return { ok:false, error:'auth_expired' };
+  if (LIVE) return rpc('my_vote_status', {}, t.at);
+  await new Promise(r => setTimeout(r, 400));                // demo backend: same rules, this browser only
+  const db = store.get('mi_demo_votes') || {};
+  return db[t.demo] ? { ok:false, error:'already_voted', matric:t.demo } : { ok:true, matric:t.demo, name:'(demo student)' };
+}
+async function castVote(theme){
+  const t = Auth.get(); if (!t) return { ok:false, error:'auth_expired' };
+  if (LIVE) return rpc('cast_vote', { p_theme: theme }, t.at);
+  await new Promise(r => setTimeout(r, 700));
   const p = phaseAt(now());
   if (p === 'showcase') return { ok:false, error:'not_open' };
   if (p === 'closed')   return { ok:false, error:'closed' };
-  const m = normMatric(matric); const db = store.get('mi_demo_votes') || {};
-  if (db[m]) return { ok:false, error:'already_voted' };
-  db[m] = { theme, name, cls, at: new Date().toISOString() }; store.set('mi_demo_votes', db);
+  const db = store.get('mi_demo_votes') || {};
+  if (db[t.demo]) return { ok:false, error:'already_voted' };
+  db[t.demo] = { theme, at: new Date().toISOString() }; store.set('mi_demo_votes', db);
   return { ok:true };
 }
 const ERR = {
   not_open: "Voting hasn't opened yet. Hold tight!",
   closed: "Voting has closed, so this vote wasn't recorded.",
-  not_eligible: "That matric number isn't on the ASPer22 batch list. Check it for typos, or contact HiCom if you think it's a mistake.",
-  already_voted: "This matric number has already voted. Each student gets one vote, and it can't be changed.",
-  bad_name: "Please enter your name.",
+  auth_expired: "Your sign-in has expired. Please sign in again.",
   network: "Couldn't reach the server. Check your connection and try again. Your vote was not recorded."
 };
 
@@ -836,7 +883,7 @@ function setPreview(i){
 function hubStatus(){
   const s = $('#hub-status'); if (!s) return;
   s.innerHTML = phase === 'showcase' ? `Preview all five worlds now. Voting unlocks <b>${myt(opensAt)}</b> and closes <b>${myt(closesAt)}</b> (MYT).`
-    : phase === 'voting' ? `<b>Voting is OPEN.</b> Enter a world to see everything about it and cast your vote. One vote per matric number.`
+    : phase === 'voting' ? `<b>Voting is OPEN.</b> Enter a world to see everything about it and cast your vote. One vote per student: sign in with your UPM student Google account.`
     : `<b>Voting has closed.</b> Thank you! HiCom will announce the winning world soon.`;
 }
 
@@ -940,7 +987,7 @@ function updateVote(){
   } else if (phase === 'voting') {
     b.removeAttribute('aria-disabled');
     b.innerHTML = `▶ VOTE FOR THIS WORLD<small>UNDI SEKARANG</small>`;
-    note.textContent = mine ? `This device already cast a vote for World ${pad(mine.theme)}. Another student can still vote here with their own matric number.` : 'One vote per matric number. Final once submitted.';
+    note.textContent = mine ? `This device already cast a vote for World ${pad(mine.theme)}. Another student can still vote here by signing in with their own account.` : 'Sign in with your UPM student Google account to vote. One vote each, final once submitted.';
   } else {
     b.setAttribute('aria-disabled','true');
     b.innerHTML = `VOTING CLOSED<small>UNDIAN DITUTUP</small>`;
@@ -951,58 +998,80 @@ function updateVote(){
 }
 
 /* ============================ DIALOG ============================ */
-let lastFocus = null, draft = { matric:'', name:'', cls:'' }, submitting = false;
+let lastFocus = null, submitting = false, who = null;
 const dlg = () => $('#dlg');
+const forLine = () => { const t = THEMES[cur]; return `<p class="for">Voting for <b>World ${pad(t.id)}: ${esc(tname(t))}</b></p>`; };
 function openModal(){
   if (phase !== 'voting') { $('#vote-note').animate?.([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'none'}],{duration:240}); return; }
-  lastFocus = document.activeElement; $('#modal').hidden = false; stepForm(); document.body.style.overflow = 'hidden';
+  if ($('#modal').hidden) { lastFocus = document.activeElement; $('#modal').hidden = false; document.body.style.overflow = 'hidden'; }
+  Auth.get() ? stepCheck() : stepSignIn();
 }
-function closeModal(){ if (submitting) return; $('#modal').hidden = true; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
-function stepForm(err){
-  const t = THEMES[cur];
+function closeModal(){ if (submitting) return; $('#modal').hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+
+function stepSignIn(err){
   dlg().innerHTML = `
-    <h2 id="dlg-title">ENTER PLAYER DETAILS</h2>
-    <p class="for">Voting for <b>World ${pad(t.id)}: ${esc(tname(t))}</b></p>
-    <form id="f" novalidate>
-      <label for="f-m">MATRIC NUMBER <small>/ No. matrik</small></label>
-      <input id="f-m" name="matric" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" required value="${esc(draft.matric)}">
-      <label for="f-n">FULL NAME <small>/ Nama penuh</small></label>
-      <input id="f-n" name="name" autocomplete="name" required maxlength="100" value="${esc(draft.name)}">
-      <label for="f-c">CLASS <small>/ Kelas (optional)</small></label>
-      <input id="f-c" name="cls" maxlength="40" value="${esc(draft.cls)}">
-      <p class="err" id="f-err" role="alert">${err ? esc(err) : ''}</p>
-      <div class="row"><button type="button" class="btn" id="f-x">CANCEL</button><button type="submit" class="btn primary">CONTINUE ▶</button></div>
-    </form>`;
+    <h2 id="dlg-title">SIGN IN TO VOTE</h2>
+    ${forLine()}
+    <p class="note">To keep it <b>one student, one vote</b>, sign in with your <b>UPM student Google account</b> (<span class="mono">…@${esc(CONFIG.UPM_EMAIL_DOMAIN)}</span>). Your matric number is read from it automatically. Nothing else is shared.</p>
+    ${LIVE ? '' : `<label for="f-m">DEMO MODE <small>/ type any matric to pretend you signed in</small></label><input id="f-m" autocomplete="off" autocapitalize="characters" placeholder="e.g. AS260704">`}
+    <p class="err" id="f-err" role="alert">${err ? esc(err) : ''}</p>
+    <div class="row"><button type="button" class="btn" id="f-x">CANCEL</button><button type="button" class="btn primary gbtn" id="f-g">SIGN IN WITH UPM GOOGLE</button></div>`;
   $('#f-x').onclick = closeModal;
-  $('#f').onsubmit = e => {
-    e.preventDefault();
-    draft = { matric: $('#f-m').value.trim(), name: $('#f-n').value.trim(), cls: $('#f-c').value.trim() };
-    const m = normMatric(draft.matric);
-    if (m.length < 4 || m.length > 15) return showErr('Please enter a valid matric number.', '#f-m');
-    if (draft.name.length < 2) return showErr(ERR.bad_name, '#f-n');
-    stepConfirm();
+  $('#f-g').onclick = () => {
+    if (LIVE) { $('#f-g').disabled = true; $('#f-g').textContent = 'OPENING GOOGLE…'; Auth.signIn(); return; }
+    const m = normMatric($('#f-m').value);
+    if (m.length < 4) { $('#f-err').textContent = 'Demo mode: type a matric number first.'; $('#f-m').focus(); return; }
+    Auth.set({ demo: m, at: 'demo', exp: Date.now() + 3600e3 }); stepCheck();
   };
-  $('#f-m').focus();
+  (LIVE ? $('#f-g') : $('#f-m')).focus();
 }
-function showErr(msg, field){ $('#f-err').textContent = msg; $(field).focus(); }
+function stepProblem(title, html){
+  dlg().innerHTML = `
+    <h2 id="dlg-title">${title}</h2>
+    <p class="note">${html}</p>
+    <div class="row"><button type="button" class="btn" id="p-x">CLOSE</button><button type="button" class="btn primary" id="p-sw">USE ANOTHER ACCOUNT</button></div>`;
+  $('#p-x').onclick = () => { Auth.clear(); closeModal(); };
+  $('#p-sw').onclick = () => { Auth.clear(); stepSignIn(); };
+  $('#p-sw').focus();
+}
+function handleRefusal(res){
+  const code = res && res.error, m = esc((res && res.matric) || '');
+  if (code === 'not_upm') { const em = Auth.email(Auth.get()) || (res && res.email) || '';
+    return stepProblem("NOT A UPM STUDENT ACCOUNT", em.toLowerCase().endsWith('@' + CONFIG.UPM_EMAIL_DOMAIN)
+      ? `Please sign in using the <b>Sign in with UPM Google</b> button.`
+      : `You signed in as <b>${esc(em || 'another account')}</b>. Please use your student account ending in <b>@${esc(CONFIG.UPM_EMAIL_DOMAIN)}</b>.`); }
+  if (code === 'not_eligible') return stepProblem("NOT ON THE BATCH LIST",
+    `<b>${m || 'This account'}</b> isn't on the ASPer22 batch list. If you're in ASPer22, contact HiCom so they can add you.`);
+  if (code === 'already_voted') return stepProblem("YOU'VE ALREADY VOTED",
+    `<b>${m || 'This account'}</b> has already cast a vote. Each student gets one vote, and it can't be changed.`);
+  if (code === 'auth_expired') { Auth.clear(); return stepSignIn(ERR.auth_expired); }
+  if (code === 'closed' || code === 'not_open') syncWindow();
+  stepSignIn(ERR[code] || ERR.network);
+}
+async function stepCheck(){
+  dlg().innerHTML = `<h2 id="dlg-title">CHECKING YOUR ACCOUNT…</h2>${forLine()}<p class="note">One moment.</p>`;
+  let res; try { res = await voteStatus(); } catch { res = { ok:false, error:'network' }; }
+  if (res && res.ok) { who = res; stepConfirm(); } else handleRefusal(res);
+}
 function stepConfirm(){
   const t = THEMES[cur];
   dlg().innerHTML = `
     <h2 id="dlg-title">ARE YOU SURE?</h2>
-    <div class="sum">World <b>${pad(t.id)}: ${esc(tname(t))}</b><br>Matric: <b>${esc(normMatric(draft.matric))}</b><br>Name: <b>${esc(draft.name)}</b>${draft.cls ? `<br>Class: <b>${esc(draft.cls)}</b>` : ''}</div>
+    <div class="sum">World <b>${pad(t.id)}: ${esc(tname(t))}</b><br>Signed in as <b>${esc(who.matric)}</b>${who.name ? ` · ${esc(who.name)}` : ''}</div>
     <div class="warn"><b>THIS IS FINAL</b>Once you lock it in, your vote can't be changed. Undian adalah muktamad.</div>
-    <div class="row"><button type="button" class="btn" id="c-back">◀ GO BACK</button><button type="button" class="btn primary" id="c-go">LOCK IT IN</button></div>`;
-  $('#c-back').onclick = () => stepForm(); $('#c-go').onclick = submit; $('#c-go').focus();
+    <div class="row"><button type="button" class="btn" id="c-back">NOT YOU?</button><button type="button" class="btn primary" id="c-go">LOCK IT IN</button></div>`;
+  $('#c-back').onclick = () => { Auth.clear(); stepSignIn(); };
+  $('#c-go').onclick = submit; $('#c-go').focus();
 }
 async function submit(){
   if (submitting) return; submitting = true;
   const go = $('#c-go'), back = $('#c-back'); go.disabled = back.disabled = true; go.textContent = 'SAVING…';
   let res;
-  try { res = await castVote(normMatric(draft.matric), THEMES[cur].id, draft.name, draft.cls); }
+  try { res = await castVote(THEMES[cur].id); }
   catch { res = { ok:false, error:'network' }; }
   submitting = false;
-  if (res && res.ok) { store.set('mi_voted', { theme: THEMES[cur].id, at: Date.now() }); stepDone(); draft = { matric:'', name:'', cls:'' }; updateVote(); buildHub(); }
-  else { const code = res && res.error; stepForm(ERR[code] || ERR.network); if (code === 'closed' || code === 'not_open') syncWindow(); }
+  if (res && res.ok) { store.set('mi_voted', { theme: THEMES[cur].id, at: Date.now() }); Auth.clear(); stepDone(); updateVote(); buildHub(); }
+  else handleRefusal(Object.assign({ matric: who && who.matric }, res));
 }
 function stepDone(){
   const t = THEMES[cur];
@@ -1011,7 +1080,7 @@ function stepDone(){
       <svg class="trophy" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M18 6h28v14a14 14 0 0 1-28 0zM10 10h8v6a6 6 0 0 1-6-6zm36 0h8a6 6 0 0 1-6 6v-6zM29 34h6v10h-6zM20 46h24v6H20zM16 54h32v6H16z"/></svg>
       <span class="badge">ACHIEVEMENT UNLOCKED</span>
       <h2 id="dlg-title">VOICE OF THE BATCH</h2>
-      <p>+1 vote for <b>World ${pad(t.id)}: ${esc(tname(t))}</b>.<br>Your vote is in, and it's final. HiCom will announce the winning world after voting closes.</p>
+      <p>+1 vote for <b>World ${pad(t.id)}: ${esc(tname(t))}</b>.<br>Your vote is in, and it's final. You've been signed out of this site. HiCom will announce the winning world after voting closes.</p>
       <div class="row"><button type="button" class="btn" id="d-share">SHARE LINK</button><button type="button" class="btn primary" id="d-ok">BACK TO WORLD</button></div>
     </div>`;
   $('#d-ok').onclick = closeModal; $('#d-ok').focus();
@@ -1034,22 +1103,23 @@ $('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeM
 
 /* ============================ SPLASH / UNLOCK ============================ */
 function showUnlock(){
-  if (!$('#splash').classList.contains('gone')) return;
+  if (!$('#splash').classList.contains('gone') || store.sget('mi_unlock_seen') || !$('#modal').hidden) return;
   store.sset('mi_unlock_seen','1');
   const u = $('#unlock'); u.hidden = false; u.focus();
   if (!reduce.matches) FX.burst();
   const hide = () => { u.hidden = true; (view === 'world' ? $('#vote-btn') : $('#hub-title')).focus(); };
   u.onclick = hide; clearTimeout(showUnlock.t); showUnlock.t = setTimeout(() => { if (!u.hidden) hide(); }, 4200);
 }
-function enter(){
+function enter(quiet){
   const s = $('#splash'); if (s.classList.contains('gone')) return;
   s.classList.add('gone'); s.setAttribute('aria-hidden','true'); s.tabIndex = -1;
-  if (!Sound.on && !store.get('mi_muted')) { Sound.toggle(); soundUI(); }   // sound on by default (needs this tap to start)
+  if (!quiet && !Sound.on && !store.get('mi_muted')) { Sound.toggle(); soundUI(); }   // sound on by default (needs this tap to start)
   setTimeout(() => { s.hidden = true; }, 600);
+  if (quiet) return;
   if (phase === 'voting' && !store.sget('mi_unlock_seen')) setTimeout(showUnlock, 300);
   else (view === 'world' ? $('#t-name') : $('#hub-title')).focus({preventScroll:true});
 }
-$('#splash').addEventListener('click', enter);
+$('#splash').addEventListener('click', () => enter());
 
 /* ============================ INPUT ============================ */
 $('#vote-btn').onclick = openModal;
@@ -1252,9 +1322,17 @@ if (!LIVE) $('#demo').hidden = false;
 buildHub(); buildTiles();
 phase = phaseAt(now()); document.body.dataset.phase = phase; hubStatus();
 FX.start('hub');
+const back = LIVE ? Auth.handleReturn() : null;     // just came back from Google sign-in?
 route(true);
+if (back) {
+  enter(true); store.sset('mi_unlock_seen','1');
+  syncWindow().then(() => {                       // use the server's voting window before reopening the vote box
+    if (phase !== 'voting') return;
+    openModal(); if (!back.ok) stepSignIn('Sign-in was cancelled or failed. Please try again.');
+  });
+}
 startClock();
-syncWindow();
+if (!back) syncWindow();
 setInterval(syncWindow, 5 * 60 * 1000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) syncWindow(); });
 $('#splash').focus();
